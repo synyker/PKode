@@ -18,8 +18,13 @@
             <p>Author:<input type="text" name="author"/></p>
             <p>Title:<input type="text" name="title"/></p>
             <p>Journal:<input type="text" name="journal"/></p>
+            <p>Volume:<input type="text" name="volume"/></p>
+            <p>Number:<input type="text" name="number"/></p>
             <p>Year:<input type="text" name="year"/></p>
-            <input type="submit" value="Send" />
+            <p>Pages:<input type="text" name="pages"/></p>
+            <p>Publisher:<input type="text" name="publisher"/></p>
+            <p>Address:<input type="text" name="address"/></p>
+            <input name="send" type="submit" value="Send" />
             
         </form>
     </body>

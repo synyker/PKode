@@ -1,8 +1,31 @@
-description 'user can add an article'
+import ohtu.*
+import org.openqa.selenium.*
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+
+description 'User can add an article'
  
-scenario "user can login with correct password", {
-    given 'command add article selected'
-    when 'information for the article to be added is entered'
-    then 'information can be found in the database'
+scenario "user can add an article", {
+    given 'command add article selected', {
+        driver = new HtmlUnitDriver();
+        driver.get("http://localhost:8080");
+        element = driver.findElement(By.linkText("Lisää artikkeli"));       
+        element.click(); 
+    }
+    when 'information for the article to be added is entered', {
+        element = driver.findElement(By.name("author"));
+        element.sendKeys("TestiKirjoittaja");
+        element = driver.findElement(By.name("title"));
+        element.sendKeys("Testinimi");
+        element = driver.findElement(By.name("journal"));
+        element.sendKeys("Testinimi");
+        element = driver.findElement(By.name("year"));
+        element.sendKeys("Testilehti");
+        element = driver.findElement(By.name("send"));
+        element.submit();
+    }
+    then 'information is added', {
+        driver.getPageSource().contains("Artikkeli on lisätty!").shouldBe true
+    }
 }
  

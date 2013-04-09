@@ -41,8 +41,7 @@ public class ReferenceRepository {
         config.setDefaultServer(false);
         config.setRegister(false);
 
-        config.addClass(Beer.class);
-        config.addClass(Brewery.class);
+        config.addClass(Reference.class);
 
         if (dropAndCreateDatabase) {
             config.setDdlGenerate(true);

@@ -16,13 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ReferenceController {
     
-    @RequestMapping("add")
-    public void processAdd(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            response.getWriter().write("Hello World!");
-        } catch (IOException ex) {
-            System.out.println("Ei onnistunut!");
-        }
+    @RequestMapping("")
+    public String processAdd(HttpServletRequest request, HttpServletResponse response) {
+        return "front";
     }
         
     @RequestMapping("hello")

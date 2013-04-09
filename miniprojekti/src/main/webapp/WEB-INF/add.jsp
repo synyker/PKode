@@ -14,7 +14,7 @@
     <body>
         <h1>Viitehallintajärjestelmä</h1>
         <h2>Lisää viite</h2>
-        <form method="POST" action="/miniprojekti/add.jsp">
+        <form method="POST" action="add">
             <p>Author:<input type="text" name="author"/></p>
             <p>Title:<input type="text" name="title"/></p>
             <p>Journal:<input type="text" name="journal"/></p>

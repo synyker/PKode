@@ -18,22 +18,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ReferenceController {
     
     @RequestMapping("")
-    public String processFront() {
+    public String getFront() {
         return "front";
     }
         
     @RequestMapping(value="add", method = RequestMethod.GET)
-    public String processAdd() {
+    public String getAdd() {
         return "add";
     }
     
+    @RequestMapping(value="add", method = RequestMethod.POST)
+    public String postAdd() {
+        return "front";
+    }
+    
     @RequestMapping(value="list-bib", method = RequestMethod.GET)
-    public String processBib() {
+    public String getBib() {
         return "list-bib";
     }
     
     @RequestMapping(value="list-norm", method = RequestMethod.GET)
-    public String processNorm() {
+    public String getNorm() {
         return "list-norm";
     }
 }

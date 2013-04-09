@@ -26,10 +26,6 @@ public class ReferenceController {
     }
     @RequestMapping("index")
     public void processIndex(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            response.getWriter().write("index");
-        } catch (IOException ex) {
-            System.out.println("Ei onnistunut!");
-        }
+        
     }
 }

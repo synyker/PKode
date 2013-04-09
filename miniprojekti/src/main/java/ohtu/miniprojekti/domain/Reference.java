@@ -32,6 +32,9 @@ public class Reference {
     @Column(name="publishdate")
     private int year;
     
+    public Reference() {
+        
+    }
     public Reference(String author, String title, String journal, int publishdate) {
         this.author = author;
         this.title = title;

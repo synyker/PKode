@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 /**
  *
  * @author jonne
@@ -17,16 +18,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ReferenceController {
     
     @RequestMapping("")
-    public String processAdd(HttpServletRequest request, HttpServletResponse response) {
+    public String processFront() {
         return "front";
     }
         
-    @RequestMapping("hello")
-    public void processHello(HttpServletRequest request, HttpServletResponse response) {
-        try {
-            response.getWriter().write("Hello World!");
-        } catch (IOException ex) {
-            System.out.println("Ei onnistunut!");
-        }
+    @RequestMapping(value="add", method = RequestMethod.GET)
+    public String processAdd() {
+        return "add";
+    }
+    
+    @RequestMapping(value="list-bib", method = RequestMethod.GET)
+    public String processBib() {
+        return "list-bib";
+    }
+    
+    @RequestMapping(value="list-norm", method = RequestMethod.GET)
+    public String processNorm() {
+        return "list-norm";
     }
 }

@@ -30,7 +30,7 @@ public class ReferenceRepository {
     }
     
     public ReferenceRepository() {
-        this.server = initializeDatabase(true, Database.SQLite);
+        this.server = initializeDatabase(false, Database.SQLite);
     }
     
     private static EbeanServer initializeDatabase(boolean dropAndCreateDatabase, Database db) {

@@ -59,6 +59,7 @@ public class ReferenceController {
     public String getNorm(HttpServletRequest request, HttpServletResponse response) {
         List<Reference> list = rr.getList();
         request.setAttribute("list", list);
+        
         return "list-norm";
     }
 }

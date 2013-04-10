@@ -51,7 +51,9 @@ public class ReferenceController {
     }
     
     @RequestMapping(value="list-bib", method = RequestMethod.GET)
-    public String getBib() {
+    public String getBib(HttpServletRequest request, HttpServletResponse response) {
+        List<Reference> list = rr.getList();
+        request.setAttribute("list", list);
         return "list-bib";
     }
     

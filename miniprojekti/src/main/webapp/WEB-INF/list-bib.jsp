@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%-- 
     Document   : list-bib
     Created on : Apr 9, 2013, 5:08:59 PM
@@ -9,9 +11,55 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="/styles.css" type="text/css" />      
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello BIB!</h1>
+        <h1>Artikkeleiden listaus BibTex-muodossa</h1>
+        
+            <c:forEach var="reference" items="${list}">      
+                <c:set var="string1" value="${reference.author}"/>
+                <c:set var="string1" value="${fn:substring(string1, 0, 2)}" />
+                <p>@Article{${string1}${reference.year},</p>
+                
+                <c:if test="${not empty reference.author}">
+                    author = ${reference.author},
+                </c:if>
+                    
+                <c:if test="${not empty reference.title}">
+                    <p>title = ${reference.title},</p>
+                </c:if>
+                    
+                <c:if test="${not empty reference.journal}">
+                    <p>journal = ${reference.journal},</p>
+                </c:if>
+                    
+                <c:if test="${not empty reference.volume}">
+                    <p>volume = ${reference.volume},</p>
+                </c:if>
+                    
+                <c:if test="${not empty reference.number}">
+                    <p>number = ${reference.number},</p>
+                </c:if>
+                    
+                <c:if test="${not empty reference.year}">
+                    <p>year = ${reference.year},</p>
+                </c:if>
+                    
+                <c:if test="${not empty reference.pages}">
+                    <p>pages = ${reference.pages},</p>
+                </c:if>
+                    
+                <c:if test="${not empty reference.publisher}">
+                    <p>publisher = ${reference.publisher},</p>
+                </c:if>
+                    
+                <c:if test="${not empty reference.address}">
+                    <p>address = ${reference.address},</p>
+                </c:if>
+                    
+                <p>}</p>
+                <br>
+            </c:forEach>
     </body>
 </html>

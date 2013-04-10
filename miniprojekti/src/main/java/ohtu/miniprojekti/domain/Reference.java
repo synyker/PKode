@@ -102,7 +102,7 @@ public class Reference {
         this.number = number;
     }
 
-    public String getNumberr() {
+    public String getNumber() {
         return this.number;
     }
 

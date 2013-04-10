@@ -33,6 +33,10 @@ public class ReferenceRepository {
         this.server = initializeDatabase(true, Database.SQLite);
     }
     
+    public ReferenceRepository(Database db) {
+        this.server = initializeDatabase(true, db);
+    }
+    
     private static EbeanServer initializeDatabase(boolean dropAndCreateDatabase, Database db) {
         ServerConfig config = new ServerConfig();
         config.setName("referenceDB");

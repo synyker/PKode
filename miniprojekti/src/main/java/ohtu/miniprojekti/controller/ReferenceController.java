@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package ohtu.miniprojekti;
+package ohtu.miniprojekti.controller;
 
+import ohtu.miniprojekti.*;
 import com.avaje.ebean.EbeanServer;
 import java.io.IOException;
 import java.util.List;

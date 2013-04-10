@@ -1,5 +1,0 @@
-<testsuite tests='1' results='0' failures='0' disabled='1' errors='0' time='0.028' name='behavior.listNormal'>
-  <testcase classname='behavior.listNormal' name='user can list all added articles in a readable form' time='0.002'>
-    <skipped />
-  </testcase>
-</testsuite>

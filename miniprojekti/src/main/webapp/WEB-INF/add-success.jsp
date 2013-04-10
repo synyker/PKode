@@ -12,7 +12,7 @@
         <title>LISÄÄMINEN ONNISTUI</title>
     </head>
     <body>
-        <a href="front"><< Takaisin etusivulle <<</a>
+        <a href="front" id ="back"><< Takaisin etusivulle <<</a>
         <h1>Artikkelin lisääminen onnistui!</h1>
     </body>
 </html>

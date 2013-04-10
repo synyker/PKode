@@ -9,7 +9,7 @@ scenario "user can add an article", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");
-        element = driver.findElement(By.linkText("Lisää artikkeli"));       
+        element = driver.findElement(By.id("add"));       
         element.click(); 
     }
     when 'information for the article to be added is entered', {
@@ -25,7 +25,7 @@ scenario "user can add an article", {
         element.submit();
     }
     then 'information is added', {
-        driver.getPageSource().contains("Artikkeli on lisätty!").shouldBe true
+        driver.getPageSource().contains("lisääminen onnistui!").shouldBe true
     }
 }
  

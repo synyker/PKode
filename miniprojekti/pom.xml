@@ -253,7 +253,7 @@
                         <contextPath>/</contextPath>
                     </webAppConfig>
                 </configuration>
-                <!--
+
                 <executions>
                     
                     <execution>
@@ -278,7 +278,7 @@
                    
 
                 </executions>  
-                -->              
+                         
             </plugin>
             
             

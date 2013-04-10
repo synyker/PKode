@@ -78,7 +78,7 @@ public class ReferenceRepository {
     }
     
     public void addArticle(Reference reference) {
-        server.save(reference);     
+        server.save(reference);
     }
     
     public List getList() {

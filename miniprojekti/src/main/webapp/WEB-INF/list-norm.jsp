@@ -10,9 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Artikkeleiden listaus ymmärrettävässä muodossa</title>
     </head>
     <body>
+        
+        <a href="front"><< Takaisin etusivulle <<</a>
         <h1>Artikkeleiden listaus ymmärrettävässä muodossa</h1>
         
         <c:forEach var="reference" items="${list}">

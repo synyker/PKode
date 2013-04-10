@@ -27,6 +27,11 @@ public class ReferenceController {
     private ReferenceRepository rr;
     
     @RequestMapping("")
+    public String getAll() {
+        return "front";
+    }
+    
+    @RequestMapping("front")
     public String getFront() {
         return "front";
     }
@@ -48,7 +53,7 @@ public class ReferenceController {
                 request.getParameter("publisher"), 
                 request.getParameter("address"));
         rr.addArticle(reference);
-        return "front";
+        return "add-success";
     }
     
     @RequestMapping(value="list-bib", method = RequestMethod.GET)

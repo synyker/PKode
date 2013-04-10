@@ -11,12 +11,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
  *
  * @author krista
  */
 public class ReferenceControllerTest {
+    private WebDriver driver;
     
     public ReferenceControllerTest() {
     }
@@ -31,14 +36,35 @@ public class ReferenceControllerTest {
     
     @Before
     public void setUp() {
+        driver = new HtmlUnitDriver();
     }
     
     @After
     public void tearDown() {
+        driver.close();
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+   @Test
+    public void afterAddingArticleSuccessMessageIsShown() {
+       
+        driver.get("http://localhost:8080");
+        System.out.println( driver.getPageSource() );
+        WebElement element = driver.findElement(By.id("add"));
+        element.click();
+ 
+        System.out.println("==");
+ 
+        System.out.println( driver.getPageSource() );
+        element = driver.findElement(By.name("author"));
+        element.sendKeys("Kalle Kirjoittaja");
+        element = driver.findElement(By.name("title"));
+        element.sendKeys("Hieno Juttu");
+        element = driver.findElement(By.name("send"));
+        element.submit();
+        
+        System.out.println("OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        System.out.println(driver.getPageSource());
+
+        assertTrue((driver.getPageSource().contains("Artikkelin lisääminen onnistui!")));  
+    }
+
 }

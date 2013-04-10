@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ReferenceController {
     
-    //@Autowired
+    @Autowired
     private ReferenceRepository rr;
     
     @RequestMapping("")

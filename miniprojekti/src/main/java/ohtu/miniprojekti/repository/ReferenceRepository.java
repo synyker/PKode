@@ -13,25 +13,38 @@ import com.avaje.ebean.config.ServerConfig;
 import com.avaje.ebean.config.dbplatform.SQLitePlatform;
 import org.h2.engine.Database;
 import ohtu.miniprojekti.domain.Reference;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author jonne
  */
+
+@Component
 public class ReferenceRepository {
+    private EbeanServer server;
     
     enum Database {
         H2, SQLite
     }
     
     public ReferenceRepository() {
-        
+        this.server = initializeDatabase(true, Database.SQLite);
     }
     
     private static EbeanServer initializeDatabase(boolean dropAndCreateDatabase, Database db) {
         ServerConfig config = new ServerConfig();
         config.setName("referenceDB");
-
+        
+        if (db == Database.H2) {
+            DataSourceConfig hdDB = new DataSourceConfig();
+            hdDB.setDriver("org.h2.Driver");
+            hdDB.setUsername("test");
+            hdDB.setPassword("test");
+            hdDB.setUrl("jdbc:h2:mem:tests;DB_CLOSE_DELAY=-1");
+            hdDB.setHeartbeatSql("select 1 ");
+            config.setDataSourceConfig(hdDB);
+        }
 
         if (db == Database.SQLite) {
             DataSourceConfig sqLite = new DataSourceConfig();

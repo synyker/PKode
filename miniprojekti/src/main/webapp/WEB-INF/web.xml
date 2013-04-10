@@ -34,7 +34,7 @@
     
     <servlet-mapping>
         <servlet-name>front-controller</servlet-name>
-        <url-pattern>/app/*</url-pattern>
+        <url-pattern>/miniprojekti/app/*</url-pattern>
     </servlet-mapping>
     
     <session-config>

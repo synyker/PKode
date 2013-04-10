@@ -20,6 +20,10 @@ import ohtu.miniprojekti.domain.Reference;
  */
 public class ReferenceRepository {
     
+    enum Database {
+        H2, SQLite
+    }
+    
     public ReferenceRepository() {
         
     }

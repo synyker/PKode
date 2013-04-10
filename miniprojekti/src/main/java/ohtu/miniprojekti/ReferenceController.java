@@ -8,6 +8,7 @@ import com.avaje.ebean.EbeanServer;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import ohtu.miniprojekti.domain.Reference;
 import ohtu.miniprojekti.repository.ReferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +35,17 @@ public class ReferenceController {
     }
     
     @RequestMapping(value="add", method = RequestMethod.POST)
-    public String postAdd() {
+    public String postAdd(HttpServletRequest request, HttpServletResponse response) {
+        Reference reference = new Reference(request.getParameter("author"), 
+                request.getParameter("title"), 
+                request.getParameter("journal"), 
+                request.getParameter("volume"), 
+                request.getParameter("number"), 
+                request.getParameter("year"), 
+                request.getParameter("pages"), 
+                request.getParameter("publisher"), 
+                request.getParameter("address"));
+        rr.addArticle(reference);
         return "front";
     }
     

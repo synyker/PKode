@@ -71,4 +71,8 @@ public class ReferenceRepository {
         
         return EbeanServerFactory.create(config);
     }
+    
+    public void  addArticle(Reference reference) {
+        server.save(reference);     
+    }
 }

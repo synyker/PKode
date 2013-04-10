@@ -1,0 +1,69 @@
+<easyb time='Wed Apr 10 16:08:41 EEST 2013' totalbehaviors='3' totalfailedbehaviors='1' totalpendingbehaviors='2' executionTime='1908'>
+  <stories scenarios='3' failedscenarios='1' pendingscenarios='2' executionTime='1908'>
+    <story name='list bib tex' scenarios='1' failedscenarios='0' pendingscenarios='1' executionTime='417'>
+      <description name='user can list all added articles in BibTex format' />
+      <scenario name='user can list all added articles in BibTexFormat' result='pending' executionTime='23'>
+        <given name='command list all selected' result='success' />
+        <when name='BibTect format selected' result='success' />
+        <then name='information should be printed on the screen in BibText format' result='pending' />
+      </scenario>
+    </story>
+    <story name='add article' scenarios='1' failedscenarios='1' pendingscenarios='0' executionTime='1463'>
+      <description name='User can add an article' />
+      <scenario name='user can add an article' result='failure' executionTime='1385'>
+        <given name='command add article selected' result='failure'>
+          <failure message='No link found with text: Lisää artikkeli
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.13.0&apos;, revision: &apos;14794&apos;, time: &apos;2011-11-18 17:49:47&apos;
+System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;3.2.0-39-generic&apos;, java.version: &apos;1.7.0_15&apos;
+Driver info: driver.version: HtmlUnitDriver'>
+            <stacktrace>org.openqa.selenium.By$ByLinkText.findElement(By.java:235)
+org.openqa.selenium.htmlunit.HtmlUnitDriver$5.call(HtmlUnitDriver.java:1230)
+org.openqa.selenium.htmlunit.HtmlUnitDriver$5.call(HtmlUnitDriver.java:1227)
+org.openqa.selenium.htmlunit.HtmlUnitDriver.implicitlyWaitFor(HtmlUnitDriver.java:978)
+org.openqa.selenium.htmlunit.HtmlUnitDriver.findElement(HtmlUnitDriver.java:1227)
+org.openqa.selenium.htmlunit.HtmlUnitDriver.findElement(HtmlUnitDriver.java:394)
+org.openqa.selenium.WebDriver$findElement.call(Unknown Source)
+org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:40)
+org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:116)
+org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:124)
+...
+</stacktrace>
+          </failure>
+        </given>
+        <when name='information for the article to be added is entered' result='failure'>
+          <failure message='Unable to locate element with name: author
+For documentation on this error, please visit: http://seleniumhq.org/exceptions/no_such_element.html
+Build info: version: &apos;2.13.0&apos;, revision: &apos;14794&apos;, time: &apos;2011-11-18 17:49:47&apos;
+System info: os.name: &apos;Linux&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;3.2.0-39-generic&apos;, java.version: &apos;1.7.0_15&apos;
+Driver info: driver.version: HtmlUnitDriver'>
+            <stacktrace>org.openqa.selenium.By$ByName.findElement(By.java:286)
+org.openqa.selenium.htmlunit.HtmlUnitDriver$5.call(HtmlUnitDriver.java:1230)
+org.openqa.selenium.htmlunit.HtmlUnitDriver$5.call(HtmlUnitDriver.java:1227)
+org.openqa.selenium.htmlunit.HtmlUnitDriver.implicitlyWaitFor(HtmlUnitDriver.java:978)
+org.openqa.selenium.htmlunit.HtmlUnitDriver.findElement(HtmlUnitDriver.java:1227)
+org.openqa.selenium.htmlunit.HtmlUnitDriver.findElement(HtmlUnitDriver.java:394)
+org.openqa.selenium.WebDriver$findElement.call(Unknown Source)
+org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:40)
+org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:116)
+org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:124)
+...
+</stacktrace>
+          </failure>
+        </when>
+        <then name='information is added' result='failure'>
+          <failure message='expected true but was false' />
+        </then>
+      </scenario>
+    </story>
+    <story name='list normal' scenarios='1' failedscenarios='0' pendingscenarios='1' executionTime='28'>
+      <description name='user can list all added articles in a readable form' />
+      <scenario name='user can list all added articles in a readable form' result='pending' executionTime='2'>
+        <given name='command list all selected' result='success' />
+        <when name='readable format selected' result='success' />
+        <then name='information should be printed on the screen in readable form' result='pending' />
+      </scenario>
+    </story>
+  </stories>
+  <specifications specifications='0' failedspecifications='0' pendingspecifications='0' executionTime='0' />
+</easyb>

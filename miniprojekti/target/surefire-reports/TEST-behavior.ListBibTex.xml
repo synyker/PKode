@@ -1,0 +1,5 @@
+<testsuite tests='1' results='0' failures='0' disabled='1' errors='0' time='0.417' name='behavior.listBibTex'>
+  <testcase classname='behavior.listBibTex' name='user can list all added articles in BibTexFormat' time='0.023'>
+    <skipped />
+  </testcase>
+</testsuite>

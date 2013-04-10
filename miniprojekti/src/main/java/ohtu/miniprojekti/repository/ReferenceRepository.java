@@ -11,6 +11,7 @@ import com.avaje.ebean.Transaction;
 import com.avaje.ebean.config.DataSourceConfig;
 import com.avaje.ebean.config.ServerConfig;
 import com.avaje.ebean.config.dbplatform.SQLitePlatform;
+import java.util.List;
 import org.h2.engine.Database;
 import ohtu.miniprojekti.domain.Reference;
 import org.springframework.stereotype.Component;
@@ -72,8 +73,12 @@ public class ReferenceRepository {
         return EbeanServerFactory.create(config);
     }
     
-    public void  addArticle(Reference reference) {
+    public void addArticle(Reference reference) {
         server.save(reference);     
+    }
+    
+    public List getList() {
+        return this.server.find(Reference.class).findList();
     }
     
 }

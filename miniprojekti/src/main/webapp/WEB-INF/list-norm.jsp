@@ -13,5 +13,12 @@
     </head>
     <body>
         <h1>Hello NORM!</h1>
+        
+        <ol>
+            <c:forEach var="reference" items="${list}">
+                <li>${reference.author}</li>
+                <li>${reference.title}</li>
+            </c:forEach>
+        </ol>
     </body>
 </html>

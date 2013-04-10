@@ -6,6 +6,7 @@ package ohtu.miniprojekti;
 
 import com.avaje.ebean.EbeanServer;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ohtu.miniprojekti.domain.Reference;
@@ -55,7 +56,9 @@ public class ReferenceController {
     }
     
     @RequestMapping(value="list-norm", method = RequestMethod.GET)
-    public String getNorm() {
+    public String getNorm(HttpServletRequest request, HttpServletResponse response) {
+        List<Reference> list = rr.getList();
+        request.setAttribute("list", list);
         return "list-norm";
     }
 }

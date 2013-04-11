@@ -20,4 +20,8 @@ scenario "user can list all added articles in readable format", {
         driver.getPageSource().contains("listaus ymmärrettävässä muodossa").shouldBe true
     }
 
+    and 'there is at least one authos field in the list', {
+       driver.getPageSource().contains("Author:").shouldBe true 
+    }
+
 }

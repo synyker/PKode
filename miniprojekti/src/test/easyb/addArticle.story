@@ -5,7 +5,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 description 'User can add an article'
  
-scenario "user can add an article", {
+scenario "when user adds an article it is saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");
@@ -27,5 +27,16 @@ scenario "user can add an article", {
     then 'succes message is shown', {
         driver.getPageSource().contains("lisääminen onnistui!").shouldBe true
     }
+
+    and 'article is shown in the list when all articles listed', {
+        element = driver.findElement(By.id("back"));
+        element.click();
+        element = driver.findElement(By.id("bib"));
+        element.click();
+        driver.getPageSource().contains("TestiKirjoittaja").shouldBe true
+    }
+
 }
+
+
  

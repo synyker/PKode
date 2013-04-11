@@ -22,6 +22,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 public class ReferenceControllerTest {
     private WebDriver driver;
+    private ReferenceController controller;
     
     public ReferenceControllerTest() {
     }
@@ -36,6 +37,7 @@ public class ReferenceControllerTest {
     
     @Before
     public void setUp() {
+        controller = new ReferenceController();
         driver = new HtmlUnitDriver();
     }
     

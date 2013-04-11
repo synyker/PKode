@@ -36,7 +36,7 @@ public class ReferenceRepository {
      * If no parameter is given for the constructor, Database is initialised as SQLite
      */
     public ReferenceRepository() {
-        this.server = initializeDatabase(false, Database.SQLite);
+        this.server = initializeDatabase(true, Database.SQLite);
     }
     
     /**

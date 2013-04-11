@@ -1,3 +1,9 @@
+import ohtu.*
+import org.openqa.selenium.*
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
+
+
 description 'user can list all added articles in a readable form'
  
 scenario "user can list all added articles in a readable form", {

@@ -13,11 +13,11 @@ scenario "user can list all added articles in BibTexFormat", {
         element = driver.findElement(By.id("bib"));       
         element.click(); 
     }
-    when 'page is loaded and there are no articles in database', {
+    when 'page is loadede', {
 
     }
-    then 'only title of the page should be printed', {
-
+    then 'title of the page should be printed', {
+        driver.getPageSource().contains("listaus BibTex").shouldBe true
     }
 }
 

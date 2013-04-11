@@ -24,7 +24,7 @@ scenario "user can add an article", {
         element = driver.findElement(By.name("send"));
         element.submit();
     }
-    then 'information is added', {
+    then 'succes message is shown', {
         driver.getPageSource().contains("lisääminen onnistui!").shouldBe true
     }
 }

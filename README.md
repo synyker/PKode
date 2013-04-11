@@ -4,4 +4,4 @@ Project/sprint backlog: https://docs.google.com/spreadsheet/ccc?key=0AmdDs8PH5BY
 
 Jenkins: http://t-jonnaira.users.cs.helsinki.fi/jenkins/job/PKode-miniprojekti/
 
-Projektia voi testikäyttää osoitteessa: http://jonnaira.users.cs.helsinki.fi:8080
+Projektia voi testikäyttää osoitteessa: http://jonnaira.users.cs.helsinki.fi:9999

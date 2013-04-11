@@ -13,7 +13,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- *
+ * Reference
+ * 
+ * all information of a reference is saved here.
+ * 
  * @author jonne
  */
 @Entity
@@ -46,6 +49,21 @@ public class Reference {
     public Reference() {
     }
 
+    /**
+     * Constructor takes all the information for the article as a parameter.
+     * 
+     * If there is no information for a field, an empty string should be saved.
+     * 
+     * @param author
+     * @param title
+     * @param journal
+     * @param volume
+     * @param number
+     * @param year
+     * @param pages
+     * @param publisher
+     * @param address 
+     */
     public Reference(String author, String title, String journal, String volume, String number, String year, String pages, String publisher, String address) {
         this.author = author;
         this.title = title;

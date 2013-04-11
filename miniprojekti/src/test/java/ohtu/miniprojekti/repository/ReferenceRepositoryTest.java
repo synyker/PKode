@@ -34,7 +34,7 @@ public class ReferenceRepositoryTest {
     
     @Before
     public void setUp() {
-        rr = new ReferenceRepository(Database.H2);
+        rr = new ReferenceRepository(true, Database.H2);
         reference = new Reference("Tekijä", "Otsikko", "Lehti", "", "", "2009", "", "", "");
     }
     

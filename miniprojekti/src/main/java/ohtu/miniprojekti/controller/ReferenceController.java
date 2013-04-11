@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 /**
  *
- * @author jonne
+ * @author jonne, krista, markus
  */
 @Controller
 public class ReferenceController {
@@ -41,6 +41,14 @@ public class ReferenceController {
         return "add";
     }
     
+    /**
+     * Defines what happens when an article is added.
+     * 
+     * The info from all fields is saved into a Reference object, which is then added to the database.
+     * @param request
+     * @param response
+     * @return 
+     */
     @RequestMapping(value="add", method = RequestMethod.POST)
     public String postAdd(HttpServletRequest request, HttpServletResponse response) {
         Reference reference = new Reference(request.getParameter("author"), 
@@ -56,6 +64,13 @@ public class ReferenceController {
         return "add-success";
     }
     
+    /**
+     * Defnes what happens when we want to list all references in BibTex Format.
+     * 
+     * @param request
+     * @param response
+     * @return 
+     */
     @RequestMapping(value="list-bib", method = RequestMethod.GET)
     public String getBib(HttpServletRequest request, HttpServletResponse response) {
         List<Reference> list = rr.getList();
@@ -63,6 +78,13 @@ public class ReferenceController {
         return "list-bib";
     }
     
+    /**
+     * Defines what happens when we want to list all references in readable format.
+     * 
+     * @param request
+     * @param response
+     * @return 
+     */
     @RequestMapping(value="list-norm", method = RequestMethod.GET)
     public String getNorm(HttpServletRequest request, HttpServletResponse response) {
         List<Reference> list = rr.getList();
@@ -70,4 +92,8 @@ public class ReferenceController {
         
         return "list-norm";
     }
+    
+//    public ReferenceRepository getReferenceRepository() {
+//        return rr;
+//    }
 }

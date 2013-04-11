@@ -17,8 +17,11 @@ import ohtu.miniprojekti.domain.Reference;
 import org.springframework.stereotype.Component;
 
 /**
- *
- * @author jonne
+ * ReferenceRepositoru handles database connections.
+ * 
+ * There are methods for example for adding a reference and listing all added references.
+ * 
+ * @author jonne, krista, markus
  */
 
 @Component
@@ -29,12 +32,20 @@ public class ReferenceRepository {
         H2, SQLite
     }
     
+    /**
+     * If no parameter is given for the constructor, Database is initialised as SQLite
+     */
     public ReferenceRepository() {
-        this.server = initializeDatabase(true, Database.SQLite);
+        this.server = initializeDatabase(false, Database.SQLite);
     }
     
-    public ReferenceRepository(Database db) {
-        this.server = initializeDatabase(true, db);
+    /**
+     * This constructor takes as a parameter the type of Database(H2 or SQLite)
+     * @param dropAndCreateDatabase boolean whether to drop and create the database
+     * @param db 
+     */
+    public ReferenceRepository(boolean dropAndCreateDatabase, Database db) {
+        this.server = initializeDatabase(dropAndCreateDatabase, db);
     }
     
     private static EbeanServer initializeDatabase(boolean dropAndCreateDatabase, Database db) {
@@ -77,10 +88,22 @@ public class ReferenceRepository {
         return EbeanServerFactory.create(config);
     }
     
+//    public void reInitialise(boolean dropAndCreateDatabase, Database db) {
+//        this.server = initializeDatabase(dropAndCreateDatabase, db);
+//    }
+    
+    /**
+     * Adds a Reference to the Databse
+     * @param reference 
+     */
     public void addArticle(Reference reference) {
         server.save(reference);
     }
     
+    /**
+     * returns a list containing all the references in the database
+     * @return 
+     */
     public List getList() {
         return this.server.find(Reference.class).findList();
     }

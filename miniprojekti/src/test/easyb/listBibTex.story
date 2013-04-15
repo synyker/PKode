@@ -36,11 +36,9 @@ scenario "user can list all added articles in BibTexFormat after adding an artic
         element.sendKeys("Hieno Juttu");
         element = driver.findElement(By.name("send"));
         element.submit();
-        element = driver.findElement(By.id("back"));
-        element.click();
-
     }
     when 'command list all in BibTex format is selected', {
+        driver.get("http://localhost:8080");
         element = driver.findElement(By.id("bib"));
         element.click();
     }

@@ -61,7 +61,7 @@ public class ReferenceController {
                 request.getParameter("publisher"), 
                 request.getParameter("address"));
         rr.addArticle(reference);
-        return "add-success";
+        return "list-norm";
     }
     
     /**

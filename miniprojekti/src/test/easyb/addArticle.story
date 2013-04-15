@@ -24,15 +24,11 @@ scenario "when user adds an article it is saved to the database", {
         element = driver.findElement(By.name("send"));
         element.submit();
     }
-    then 'succes message is shown', {
-        driver.getPageSource().contains("lisääminen onnistui!").shouldBe true
+    then 'all articles in readable format are shown', {
+        driver.getPageSource().contains("listaus ymmärrettävässä muodossa").shouldBe true
     }
 
-    and 'article is shown in the list when all articles listed', {
-        element = driver.findElement(By.id("back"));
-        element.click();
-        element = driver.findElement(By.id("bib"));
-        element.click();
+    and 'article just added is shown in the list', {
         driver.getPageSource().contains("TestiKirjoittaja").shouldBe true
     }
 

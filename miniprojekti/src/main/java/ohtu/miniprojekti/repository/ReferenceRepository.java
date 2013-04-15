@@ -96,14 +96,30 @@ public class ReferenceRepository {
      * @param reference 
      */
     public void addArticle(Reference reference) {
+        reference = checkThatTextidUnique(reference);
         server.save(reference);
+    }
+    
+    private Reference checkThatTextidUnique(Reference reference) {
+        int amount = 0;
+        List<Reference> allreferences = getList();
+        for (Reference ref : allreferences) {
+            if (ref.getTextid().contains(reference.getTextid())) {
+                amount++;
+            }
+        }
+        if (amount != 0) {
+            char c = (char) (96+amount);
+            reference.setTextid(reference.getTextid().concat(""+c));
+        }
+        return reference;
     }
     
     /**
      * returns a list containing all the references in the database
      * @return 
      */
-    public List getList() {
+    public List<Reference> getList() {
         return this.server.find(Reference.class).findList();
     }
     

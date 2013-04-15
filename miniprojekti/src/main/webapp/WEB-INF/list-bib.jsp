@@ -19,9 +19,7 @@
         <h1>Artikkeleiden listaus BibTex-muodossa</h1>
         
             <c:forEach var="reference" items="${list}">      
-                <c:set var="string1" value="${reference.author}"/>
-                <c:set var="string1" value="${fn:substring(string1, 0, 2)}" />
-                <p>@Article{${string1}${reference.year},</p>
+                <p>@Article{${reference.textid},</p>
                 
                 <c:if test="${not empty reference.author}">
                     <p>author = {${reference.author}},</p>

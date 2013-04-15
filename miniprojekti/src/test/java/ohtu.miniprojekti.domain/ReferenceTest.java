@@ -97,7 +97,7 @@ public class ReferenceTest {
     }
     
     @Test
-    public void textidWorksIfNoAUthorGiven() {
+    public void textidWorksIfNoAuthorGiven() {
         reference = new Reference("", "Otsikko", "Lehti", "", "", "2013", "", "", "");
         assertEquals("13", reference.getTextid());
     }

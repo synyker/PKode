@@ -15,6 +15,7 @@
     <body>
         
         <a href="front"><< Takaisin etusivulle <<</a>
+        <a href="list-bib" id="bib"><< Listaus Bib-Tex muodossa <<</a>
         <h1>Artikkeleiden listaus ymmärrettävässä muodossa</h1>
         
         <c:forEach var="reference" items="${list}">

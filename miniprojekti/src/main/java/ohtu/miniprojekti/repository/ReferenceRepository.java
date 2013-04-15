@@ -67,7 +67,6 @@ public class ReferenceRepository {
             sqLite.setDriver("org.sqlite.JDBC");
             sqLite.setUsername("reference");
             sqLite.setPassword("reference");
-            //sqLite.setUrl("jdbc:sqlite:/home/mluukkai/sqlite/kannat/beer.db");
             sqLite.setUrl("jdbc:sqlite:reference.db");
             config.setDataSourceConfig(sqLite);
             config.setDatabasePlatform(new SQLitePlatform());

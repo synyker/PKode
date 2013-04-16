@@ -64,12 +64,6 @@ public class Reference {
         this.organisation = map.get("organisation");
         this.textid = generateTextId(this.author, this.year);
     }
-    
-    private String getValue(Map<String,String[]> map,String key) {
-        if(map.get(key) != null)
-            return map.get(key)[0];
-        return null;
-    }
 
     public String getType() {
         return type;

@@ -11,7 +11,13 @@ create table Reference (
   year                      varchar(255),
   pages                     varchar(255),
   publisher                 varchar(255),
-  address                   varchar(255))
+  address                   varchar(255),
+  series                    varchar(255),
+  edition                   varchar(255),
+  month                     varchar(255),
+  note                      varchar(255),
+  editor                    varchar(255),
+  organisation              varchar(255))
 ;
 
 

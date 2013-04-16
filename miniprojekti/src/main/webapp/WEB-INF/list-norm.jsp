@@ -16,6 +16,13 @@
         
         <a href="front"><< Takaisin etusivulle <<</a>
         <a href="list-bib" id="bib"> << Listaus Bib-Tex muodossa <<</a>
+        
+        <p>Hae viitteitä kirjoittajan perusteella:
+            <form action="search" method="GET">
+                <input type="text" name="author">
+                <input name="send" type="submit" value="send"/>
+            </form>
+        </p>
         <h1>Artikkeleiden listaus ymmärrettävässä muodossa</h1>
         
         <c:forEach var="reference" items="${list}">

@@ -19,7 +19,7 @@
         <h1>Artikkeleiden listaus BibTex-muodossa</h1>
         
             <c:forEach var="reference" items="${list}">      
-                <p>@Article{${reference.textid},</p>
+                <p>@${reference.type}{${reference.textid},</p>
                 
                 <c:if test="${not empty reference.author}">
                     <p>author = {${reference.author}},</p>

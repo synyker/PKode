@@ -8,6 +8,7 @@ import ohtu.miniprojekti.*;
 import com.avaje.ebean.EbeanServer;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ohtu.miniprojekti.domain.Reference;
@@ -45,19 +46,19 @@ public class ReferenceController {
 
     @RequestMapping(value = "add-article", method = RequestMethod.GET)
     public String getAddArticle(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("type", "article");
+        request.setAttribute("type", "Article");
         return "add";
     }
 
     @RequestMapping(value = "add-book", method = RequestMethod.GET)
     public String getAddBook(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("type", "book");
+        request.setAttribute("type", "Book");
         return "add";
     }
 
     @RequestMapping(value = "add-inproceedings", method = RequestMethod.GET)
     public String getAddInproceedings(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("type", "inproceedings");
+        request.setAttribute("type", "InProceedings");
         return "add";
     }
 
@@ -73,16 +74,17 @@ public class ReferenceController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String postAdd(HttpServletRequest request, HttpServletResponse response) {
-        Reference reference = new Reference(request.getParameter("author"),
-                request.getParameter("title"),
-                request.getParameter("journal"),
-                request.getParameter("volume"),
-                request.getParameter("number"),
-                request.getParameter("year"),
-                request.getParameter("pages"),
-                request.getParameter("publisher"),
-                request.getParameter("address"));
-        rs.addArticle(reference);
+//        Reference reference = new Reference(request.getParameter("author"),
+//                request.getParameter("title"),
+//                request.getParameter("journal"),
+//                request.getParameter("volume"),
+//                request.getParameter("number"),
+//                request.getParameter("year"),
+//                request.getParameter("pages"),
+//                request.getParameter("publisher"),
+//                request.getParameter("address"));
+        Map<String,String[]> map = request.getParameterMap();
+        rs.addArticle(new Reference(map));
         List<Reference> list = rs.getList();
         request.setAttribute("list", list);
         return "list-norm";

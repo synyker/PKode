@@ -1,5 +1,6 @@
 package ohtu.miniprojekti.domain;
 
+import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,34 +21,56 @@ public class Reference {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
     private Integer id;
-    @Column(name = "textid")
     private String textid;
-    @Column(name="type")
     private String type;
-    @Column(name = "author")
     private String author;
-    @Column(name = "title")
     private String title;
-    @Column(name = "booktitle")
     private String booktitle;
-    @Column(name = "journal")
     private String journal;
-    @Column(name = "volume")
     private String volume;
-    @Column(name = "number")
     private String number;
-    @Column(name = "year")
     private String year;
-    @Column(name = "pages")
     private String pages;
-    @Column(name = "publisher")
     private String publisher;
-    @Column(name = "address")
     private String address;
+    private String series;
+    private String edition;
+    private String month;
+    private String note;
+    private String editor;
+    private String organisation;
+    
 
     public Reference() {
+    }
+    
+    public Reference(Map<String,String[]> map) {
+        this.type = getValue(map, "type");
+        this.author = getValue(map, "author");
+        this.title = getValue(map, "title");
+        this.booktitle = getValue(map, "booktitle");
+        this.journal = getValue(map, "journal");
+        this.volume = getValue(map, "volume");
+        this.number = getValue(map, "number");
+        this.year = getValue(map, "year");
+        this.pages = getValue(map, "pages");
+        this.publisher = getValue(map, "publisher");
+        this.address = getValue(map, "address");
+        this.series = getValue(map, "series");
+        this.edition = getValue(map, "edition");
+        this.month = getValue(map, "month");
+        this.note = getValue(map, "note");
+        this.editor = getValue(map, "editor");
+        this.organisation = getValue(map, "organisation");
+        
+        this.textid = generateTextId(this.author, this.year);
+    }
+    
+    private String getValue(Map<String,String[]> map,String key) {
+        if(map.get(key) != null)
+            return map.get(key)[0];
+        return null;
     }
 
     /**
@@ -78,7 +101,7 @@ public class Reference {
         this.textid = generateTextId(author, year);
         this.type = "article";
     }
-
+    
     public String getType() {
         return type;
     }
@@ -249,5 +272,53 @@ public class Reference {
 
     public String getAddress() {
         return this.address;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getEdition() {
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+        this.edition = edition;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public String getEditor() {
+        return editor;
+    }
+
+    public void setEditor(String editor) {
+        this.editor = editor;
+    }
+
+    public String getOrganisation() {
+        return organisation;
+    }
+
+    public void setOrganisation(String organisation) {
+        this.organisation = organisation;
     }
 }

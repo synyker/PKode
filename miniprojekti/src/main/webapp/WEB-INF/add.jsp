@@ -16,7 +16,7 @@
         <h1>Viitehallintajärjestelmä</h1>
         <a href="front"><< Takaisin etusivulle <<</a>
         <c:choose>
-            <c:when test="${type == 'article'}">
+            <c:when test="${type == 'Article'}">
                 <h2>Lisää artikkelin viite</h2>
                 <form method="POST" action="add">
                     <p>Author:<input type="text" name="author"/></p>
@@ -33,7 +33,7 @@
 
                 </form>
             </c:when>
-            <c:when test="${type == 'book'}">
+            <c:when test="${type == 'InProceedings'}">
                 <h2>Lisää kirjan viite</h2>
                 <form method="POST" action="add">
                     <p>Author:<input type="text" name="author"/></p>
@@ -51,7 +51,7 @@
 
                 </form>
             </c:when>
-            <c:when test="${type == 'inproceedings'}">
+            <c:when test="${type == 'Book'}">
                 <h2>Lisää inproceedings viite</h2>
                 <form method="POST" action="add">
                     <p>Author:<input type="text" name="author"/></p>

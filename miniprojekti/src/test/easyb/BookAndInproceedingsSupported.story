@@ -20,10 +20,10 @@ scenario "when user adds a book it is saved to the database", {
         element.sendKeys("TestiKirjoittaja");
         element = driver.findElement(By.name("title"));
         element.sendKeys("Testinimi");
-        element = driver.findElement(By.name("journal"));
-        element.sendKeys("Testinimi");
+        element = driver.findElement(By.name("booktitle"));
+        element.sendKeys("Testikirjatitle");
         element = driver.findElement(By.name("year"));
-        element.sendKeys("Testilehti");
+        element.sendKeys("testivuosi");
         element = driver.findElement(By.name("send"));
         element.submit();
 }
@@ -50,10 +50,10 @@ scenario "when user adds inproceedings they are saved to the database", {
         element.sendKeys("TestiKirjoittaja");
         element = driver.findElement(By.name("title"));
         element.sendKeys("Testinimi");
-        element = driver.findElement(By.name("journal"));
-        element.sendKeys("Testinimi");
-        element = driver.findElement(By.name("year"));
-        element.sendKeys("Testilehti");
+        element = driver.findElement(By.name("series"));
+        element.sendKeys("testiseries");
+        element = driver.findElement(By.name("edition"));
+        element.sendKeys("testiedition");
         element = driver.findElement(By.name("send"));
         element.submit();
 }

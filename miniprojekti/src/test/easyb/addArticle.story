@@ -9,8 +9,10 @@ scenario "when user adds an article it is saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");
-        element = driver.findElement(By.id("add"));       
-        element.click(); 
+        element = driver.findElement(By.id("what-to-add"));
+        element.click();
+        element = driver.findElement(By.id("addA"));
+        element.click();
     }
     when 'information for the article to be added is entered', {
         element = driver.findElement(By.name("author"));

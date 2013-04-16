@@ -28,6 +28,7 @@
                     <p>Pages:<input type="text" name="pages"/></p>
                     <p>Publisher:<input type="text" name="publisher"/></p>
                     <p>Address:<input type="text" name="address"/></p>
+                    <input type="hidden" name="type" value="${type}"/>
                     <input name="send" type="submit" value="Send" />
 
                 </form>
@@ -45,6 +46,7 @@
                     <p>Publisher:<input type="text" name="publisher"/></p>
                     <p>Address:<input type="text" name="address"/></p>
                     <p>Note:<input type="text" name="note"/></p>
+                    <input type="hidden" name="type" value="${type}"/>
                     <input name="send" type="submit" value="Send" />
 
                 </form>
@@ -63,6 +65,7 @@
                     <p>Address:<input type="text" name="address"/></p>
                     <p>Month:<input type="text" name="month"/></p>
                     <p>Note:<input type="text" name="note"/></p>
+                    <input type="hidden" name="type" value="${type}"/>
                     <input name="send" type="submit" value="Send" />
 
                 </form>

@@ -10,7 +10,9 @@ scenario "after adding an article to database it is shown in the list in BibTex 
     given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");
-        element = driver.findElement(By.id("add"));
+        element = driver.findElement(By.id("what-to-add"));
+        element.click();
+        element = driver.findElement(By.id("addA"));
         element.click();
         element = driver.findElement(By.name("author"));
         element.sendKeys("Testaaja, Kalle");

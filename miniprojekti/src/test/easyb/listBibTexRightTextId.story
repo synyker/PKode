@@ -10,7 +10,9 @@ scenario "Reference has correct textId when only one with same id added to datab
     given 'article with id AB09 is added', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");
-        element = driver.findElement(By.id("add"));
+        element = driver.findElement(By.id("what-to-add"));
+        element.click();
+        element = driver.findElement(By.id("addA"));
         element.click();
         element = driver.findElement(By.name("author"));
         element.sendKeys("Aapeli, Kalle; Baabeli, Nalle");
@@ -33,7 +35,9 @@ scenario "Reference has correct textid when another with same original id is add
     given 'another article with id AB09 has been added to the database', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");
-        element = driver.findElement(By.id("add"));
+        element = driver.findElement(By.id("what-to-add"));
+        element.click();
+        element = driver.findElement(By.id("addA"));
         element.click();
         element = driver.findElement(By.name("author"));
         element.sendKeys("Aapeli, Kalle; Baabeli, Pekka");

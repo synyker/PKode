@@ -1,8 +1,6 @@
-SET REFERENTIAL_INTEGRITY FALSE;
+PRAGMA foreign_keys = OFF;
 
-drop table if exists Reference;
+drop table Reference;
 
-SET REFERENTIAL_INTEGRITY TRUE;
-
-drop sequence if exists Reference_seq;
+PRAGMA foreign_keys = ON;
 

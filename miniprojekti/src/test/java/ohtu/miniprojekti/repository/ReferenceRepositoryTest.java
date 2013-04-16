@@ -87,4 +87,11 @@ public class ReferenceRepositoryTest {
          rr.addArticle(new Reference("Tekijä2", "Otsikko2", "Lehti2", "", "", "2009", "", "", ""));
          assertEquals("T09c", rr.getList().get(3).getTextid());
      }
+      
+     @Test
+     public void addedArticleHasCorrectTextIdWhenTwoWithSimilarID() {
+         rr.addArticle(reference);
+         rr.addArticle(new Reference("Tekijä2; Tekijä3", "Otsikko2", "Lehti2", "", "", "2009", "", "", ""));
+         assertEquals("TT09", rr.getList().get(1).getTextid());
+     }
 }

@@ -104,7 +104,7 @@ public class ReferenceRepository {
         int amount = 0;
         List<Reference> allreferences = getList();
         for (Reference ref : allreferences) {
-            if (ref.getTextid().contains(reference.getTextid())) {
+            if (ref.getTextid().startsWith(reference.getTextid())) {
                 amount++;
             }
         }

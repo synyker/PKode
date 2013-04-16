@@ -44,24 +44,24 @@ public class Reference {
 
     public Reference() {}
     
-    public Reference(Map<String,String[]> map) {
-        this.type = getValue(map, "type");
-        this.author = getValue(map, "author");
-        this.title = getValue(map, "title");
-        this.booktitle = getValue(map, "booktitle");
-        this.journal = getValue(map, "journal");
-        this.volume = getValue(map, "volume");
-        this.number = getValue(map, "number");
-        this.year = getValue(map, "year");
-        this.pages = getValue(map, "pages");
-        this.publisher = getValue(map, "publisher");
-        this.address = getValue(map, "address");
-        this.series = getValue(map, "series");
-        this.edition = getValue(map, "edition");
-        this.month = getValue(map, "month");
-        this.note = getValue(map, "note");
-        this.editor = getValue(map, "editor");
-        this.organisation = getValue(map, "organisation");
+    public Reference(Map<String,String> map) {
+        this.type = map.get("type");
+        this.author = map.get("author");
+        this.title = map.get("title");
+        this.booktitle = map.get("booktitle");
+        this.journal = map.get("journal");
+        this.volume = map.get("volume");
+        this.number = map.get("number");
+        this.year = map.get("year");
+        this.pages = map.get("pages");
+        this.publisher = map.get("publisher");
+        this.address = map.get("address");
+        this.series = map.get("series");
+        this.edition = map.get("edition");
+        this.month = map.get("month");
+        this.note = map.get("note");
+        this.editor = map.get("editor");
+        this.organisation = map.get("organisation");
         this.textid = generateTextId(this.author, this.year);
     }
     

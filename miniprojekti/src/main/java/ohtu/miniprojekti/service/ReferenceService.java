@@ -4,7 +4,10 @@
  */
 package ohtu.miniprojekti.service;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import ohtu.miniprojekti.domain.Reference;
 import ohtu.miniprojekti.repository.ReferenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +28,10 @@ public class ReferenceService {
         
     }
 
-    public void addArticle(Reference reference) {
-        rr.addArticle(reference);
+    public void addArticle(Map<String,String[]> map) {
+        Map<String,String> values = modifyMap(map);
+        Reference r = new Reference(values);
+        rr.addArticle(r);
     }
 
     public List<Reference> getList() {
@@ -55,6 +60,19 @@ public class ReferenceService {
         text = text.replace("ä", "\\\"{a}yr\\\"");
         text = text.replace("ö", "\\\"{o}yr\\\"");
         return text;
+    }
+
+    private Map<String, String> modifyMap(Map<String, String[]> map) {
+        Map<String,String> map1 = new HashMap<String,String>();
+        Iterator i = map.entrySet().iterator();
+        while(i.hasNext()) {
+            Map.Entry pairs = (Map.Entry<String,String[]>)i.next();
+            String key = (String) pairs.getKey();
+            String value = ((String[]) pairs.getValue())[0];
+            map1.put(key, value);
+        }
+        
+        return map1;
     }
     
     

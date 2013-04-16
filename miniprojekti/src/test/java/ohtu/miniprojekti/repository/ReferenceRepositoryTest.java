@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class ReferenceRepositoryTest {
     ReferenceRepository rr;
     Reference reference;
-    Map<String,String[]> map;
+    Map<String,String> map;
     
     public ReferenceRepositoryTest() {
     }
@@ -38,17 +38,12 @@ public class ReferenceRepositoryTest {
     @Before
     public void setUp() {
         rr = new ReferenceRepository(true, Database.H2);
-        map = new HashMap<String,String[]>();
-        String[] arr = new String[1];
-        arr[0] = "Tekijä";
-        map.put("author", arr);
-        arr[0] = "Otsikko";
-        map.put("title",arr);
-        arr[0] = "Lehti";
-        map.put("journal",arr);
-        arr[0] = "2009";
-        map.put("year",arr);
-        //reference = new Reference("Tekijä", "Otsikko", "Lehti", "", "", "2009", "", "", "");
+        map = new HashMap<String,String>();
+        map.put("author", "Tekijä");
+        map.put("title","Otsikko");
+        map.put("journal","Lehti");
+        map.put("year","2009");
+        reference = new Reference(map);
     }
     
     @After
@@ -104,10 +99,8 @@ public class ReferenceRepositoryTest {
      @Test
      public void addedArticleHasCorrectTextIdWhenTwoWithSimilarID() {
          rr.addArticle(reference);
-         Map<String,String[]> map1 = map;
-         String[] a = new String[1];
-         a[0] = "Tekijä; Tamppaaja";
-         map1.put("author", a);
+         Map<String,String> map1 = map;
+         map1.put("author", "Tekijä; Tamppaaja");
          rr.addArticle(new Reference(map));
          assertEquals("TT09", rr.getList().get(1).getTextid());
      }

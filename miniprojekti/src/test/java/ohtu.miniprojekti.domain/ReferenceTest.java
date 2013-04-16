@@ -1,5 +1,7 @@
 package ohtu.miniprojekti;
 
+import java.util.HashMap;
+import java.util.Map;
 import ohtu.miniprojekti.domain.Reference;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,7 +17,7 @@ import static org.junit.Assert.*;
 public class ReferenceTest {
 
     Reference reference;
-
+    Map<String,String> map;
     public ReferenceTest() {
     }
 
@@ -29,7 +31,14 @@ public class ReferenceTest {
 
     @Before
     public void setUp() {
-        reference = new Reference("Tekijä", "Otsikko", "Lehti", "", "", "2009", "", "", "");
+        map = new HashMap<String,String>();
+        map.put("author", "Tekijä");
+        map.put("title","Otsikko");
+        map.put("journal","Lehti");
+        map.put("year","2009");
+        map.put("type","Article");
+        map.put("volume","");
+        reference = new Reference(map);
     }
 
     @After
@@ -58,7 +67,7 @@ public class ReferenceTest {
 
     @Test
     public void typeCorrectWhenAddingArticle() {
-        assertEquals("article", reference.getType());
+        assertEquals("Article", reference.getType());
     }
 
     @Test
@@ -68,43 +77,52 @@ public class ReferenceTest {
 
     @Test
     public void textIdGeneratedCorrectlyWhenMoreThanOneAuthor() {
-        reference = new Reference("Tekijä, Kalle; Sukunimi, Seppo; ääpeli, olli", "Otsikko", "Lehti", "", "", "2013", "", "", "");
-        assertEquals("TSä13", reference.getTextid());
+        map.put("author", "Tekijä, Kalle; Sukunimi, Seppo; ääpeli, olli");
+        reference = new Reference(map);
+        assertEquals("TSä09", reference.getTextid());
     }
 
     @Test
     public void textIdGeneratedCorrectlyWhenMoreThanOneAuthorAndWhiteSpaces() {
-        reference = new Reference("Tekijä, Kalle   ; Sukunimi, Seppo  ;  ääpeli, olli", "Otsikko", "Lehti", "", "", "2013", "", "", "");
-        assertEquals("TSä13", reference.getTextid());
+        map.put("author", "Tekijä, Kalle   ; Sukunimi, Seppo  ;  ääpeli, olli");
+        reference = new Reference(map);
+        assertEquals("TSä09", reference.getTextid());
     }
 
     @Test
     public void textIdGeneratedCorrectlyWhenYearTooLong() {
-        reference = new Reference("Tekijä, Kalle; Sukunimi, Seppo; ääpeli, olli", "Otsikko", "Lehti", "", "", "20000000000013", "", "", "");
-        assertEquals("TSä13", reference.getTextid());
+        map.put("year", "20000000000013");
+        reference = new Reference(map);
+        assertEquals("T13", reference.getTextid());
     }
 
     @Test
     public void typeCorrectWhenAddingBook() {
-        reference = new Reference("Tekijä, Kalle; Sukunimi, Seppo; ääpeli, olli", "Otsikko", "2009", "", "");
-        assertEquals("book", reference.getType());
+        map.put("type","Book");
+        reference = new Reference(map);
+        assertEquals("Book", reference.getType());
     }
 
     @Test
     public void typeCorrectWhenAddingInproceedings() {
-        reference = new Reference("Tekijä, Kalle; Sukunimi, Seppo; ääpeli, olli", "Otsikko", "Lehti", "2009", "", "", "");
-        assertEquals("inproceedings", reference.getType());
+        map.put("type", "InProceedings");
+        reference = new Reference(map);
+        assertEquals("InProceedings", reference.getType());
     }
     
     @Test
     public void textidWorksIfNoAuthorGiven() {
-        reference = new Reference("", "Otsikko", "Lehti", "", "", "2013", "", "", "");
-        assertEquals("13", reference.getTextid());
+        map.put("author", "");
+        reference = new Reference(map);
+        assertEquals("09", reference.getTextid());
     }
     
      @Test
     public void textidWorksIfNoYearGiven() {
-        reference = new Reference("Kalle", "Otsikko", "Lehti", "", "", "", "", "", "");
+        String[] arr = new String[1]; 
+        map.put("author", "Kalle");
+        map.put("year","");
+        reference = new Reference(map);
         assertEquals("K", reference.getTextid());
     }
 }

@@ -75,7 +75,7 @@ public class ReferenceController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String postAdd(HttpServletRequest request, HttpServletResponse response) {
         Map<String,String[]> map = request.getParameterMap();
-        rs.addArticle(new Reference(map));
+        rs.addArticle(map);
         List<Reference> list = rs.getList();
         request.setAttribute("list", list);
         return "list-norm";

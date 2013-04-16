@@ -4,6 +4,8 @@
  */
 package ohtu.miniprojekti.repository;
 
+import java.util.HashMap;
+import java.util.Map;
 import ohtu.miniprojekti.domain.Reference;
 import ohtu.miniprojekti.repository.ReferenceRepository.Database;
 import org.junit.After;
@@ -20,6 +22,7 @@ import static org.junit.Assert.*;
 public class ReferenceRepositoryTest {
     ReferenceRepository rr;
     Reference reference;
+    Map<String,String[]> map;
     
     public ReferenceRepositoryTest() {
     }
@@ -35,7 +38,17 @@ public class ReferenceRepositoryTest {
     @Before
     public void setUp() {
         rr = new ReferenceRepository(true, Database.H2);
-        reference = new Reference("Tekijä", "Otsikko", "Lehti", "", "", "2009", "", "", "");
+        map = new HashMap<String,String[]>();
+        String[] arr = new String[1];
+        arr[0] = "Tekijä";
+        map.put("author", arr);
+        arr[0] = "Otsikko";
+        map.put("title",arr);
+        arr[0] = "Lehti";
+        map.put("journal",arr);
+        arr[0] = "2009";
+        map.put("year",arr);
+        //reference = new Reference("Tekijä", "Otsikko", "Lehti", "", "", "2009", "", "", "");
     }
     
     @After
@@ -62,7 +75,7 @@ public class ReferenceRepositoryTest {
      @Test
      public void getListReturnsListWithRightSizeWhenMoreThanOneAdded() {
          rr.addArticle(reference);
-         rr.addArticle(new Reference("Tekijä2", "Otsikko2", "Lehti2", "", "", "1886", "", "", ""));
+         rr.addArticle(new Reference(map));
          assertTrue(rr.getList().size() == 2);
      }
      
@@ -75,23 +88,27 @@ public class ReferenceRepositoryTest {
      @Test
      public void addedArticleHasCorrectTextIdWhenTwoWithSameId() {
          rr.addArticle(reference);
-         rr.addArticle(new Reference("Tekijä2", "Otsikko2", "Lehti2", "", "", "1809", "", "", ""));
+         rr.addArticle(new Reference(map));
          assertEquals("T09a", rr.getList().get(1).getTextid());
      }
      
       @Test
      public void addedArticleHasCorrectTextIdWhenFourWithSameId() {
          rr.addArticle(reference);
-         rr.addArticle(new Reference("Tekijä2", "Otsikko2", "Lehti2", "", "", "1809", "", "", ""));
-         rr.addArticle(new Reference("Tekijä2", "Otsikko2", "Lehti2", "", "", "1909", "", "", ""));
-         rr.addArticle(new Reference("Tekijä2", "Otsikko2", "Lehti2", "", "", "2009", "", "", ""));
+         rr.addArticle(new Reference(map));
+         rr.addArticle(new Reference(map));
+         rr.addArticle(new Reference(map));
          assertEquals("T09c", rr.getList().get(3).getTextid());
      }
       
      @Test
      public void addedArticleHasCorrectTextIdWhenTwoWithSimilarID() {
          rr.addArticle(reference);
-         rr.addArticle(new Reference("Tekijä2; Tekijä3", "Otsikko2", "Lehti2", "", "", "2009", "", "", ""));
+         Map<String,String[]> map1 = map;
+         String[] a = new String[1];
+         a[0] = "Tekijä; Tamppaaja";
+         map1.put("author", a);
+         rr.addArticle(new Reference(map));
          assertEquals("TT09", rr.getList().get(1).getTextid());
      }
 }

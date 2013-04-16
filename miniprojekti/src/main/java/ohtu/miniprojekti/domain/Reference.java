@@ -42,8 +42,7 @@ public class Reference {
     private String organisation;
     
 
-    public Reference() {
-    }
+    public Reference() {}
     
     public Reference(Map<String,String[]> map) {
         this.type = getValue(map, "type");
@@ -63,7 +62,6 @@ public class Reference {
         this.note = getValue(map, "note");
         this.editor = getValue(map, "editor");
         this.organisation = getValue(map, "organisation");
-        
         this.textid = generateTextId(this.author, this.year);
     }
     
@@ -73,35 +71,6 @@ public class Reference {
         return null;
     }
 
-    /**
-     * Constructor that takes all the information for an article as a parameter.
-     *
-     * If there is no information for a field, an empty string should be saved.
-     *
-     * @param author
-     * @param title
-     * @param journal
-     * @param volume
-     * @param number
-     * @param year
-     * @param pages
-     * @param publisher
-     * @param address
-     */
-    public Reference(String author, String title, String journal, String volume, String number, String year, String pages, String publisher, String address) {
-        this.author = author;
-        this.title = title;
-        this.journal = journal;
-        this.volume = volume;
-        this.number = number;
-        this.year = year;
-        this.pages = pages;
-        this.publisher = publisher;
-        this.address = address;
-        this.textid = generateTextId(author, year);
-        this.type = "article";
-    }
-    
     public String getType() {
         return type;
     }
@@ -124,37 +93,6 @@ public class Reference {
      * @param publisher
      * @param address
      */
-    public Reference(String author, String title, String booktitle, String year, String pages, String publisher, String address) {
-        this.author = author;
-        this.title = title;
-        this.booktitle = booktitle;
-        this.year = year;
-        this.pages = pages;
-        this.publisher = publisher;
-        this.address = address;
-        this.textid = generateTextId(author, year);
-        this.type = "inproceedings";
-    }
-
-    /**
-     * Constructor that takes as a parameter all the information needed for a
-     * book.
-     *
-     * @param author
-     * @param title
-     * @param year
-     * @param publisher
-     * @param address
-     */
-    public Reference(String author, String title, String year, String publisher, String address) {
-        this.author = author;
-        this.title = title;
-        this.year = year;
-        this.publisher = publisher;
-        this.address = address;
-        this.textid = generateTextId(author, year);
-        this.type = "book";
-    }
     
     /**
      * Generates a textid for the reference.

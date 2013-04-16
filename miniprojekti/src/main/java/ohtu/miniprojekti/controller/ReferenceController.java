@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import ohtu.miniprojekti.domain.Reference;
 import ohtu.miniprojekti.repository.ReferenceRepository;
+import ohtu.miniprojekti.service.ReferenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ReferenceController {
 
     @Autowired
-    private ReferenceRepository rr;
+    private ReferenceService rs;
 
     @RequestMapping("")
     public String getAll() {
@@ -81,8 +82,8 @@ public class ReferenceController {
                 request.getParameter("pages"),
                 request.getParameter("publisher"),
                 request.getParameter("address"));
-        rr.addArticle(reference);
-        List<Reference> list = rr.getList();
+        rs.addArticle(reference);
+        List<Reference> list = rs.getList();
         request.setAttribute("list", list);
         return "list-norm";
     }
@@ -96,7 +97,7 @@ public class ReferenceController {
      */
     @RequestMapping(value = "list-bib", method = RequestMethod.GET)
     public String getBib(HttpServletRequest request, HttpServletResponse response) {
-        List<Reference> list = rr.getList();
+        List<Reference> list = rs.getList();
         request.setAttribute("list", list);
         return "list-bib";
     }
@@ -111,7 +112,7 @@ public class ReferenceController {
      */
     @RequestMapping(value = "list-norm", method = RequestMethod.GET)
     public String getNorm(HttpServletRequest request, HttpServletResponse response) {
-        List<Reference> list = rr.getList();
+        List<Reference> list = rs.getList();
         request.setAttribute("list", list);
 
         return "list-norm";

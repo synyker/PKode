@@ -7,7 +7,7 @@
     <body>
         <h1>Viitehallintajärjestelmä</h1>
         <ul>
-            <li><a href="add" id="add">Lisää artikkeli</a></li>
+            <li><a href="what-to-add" id="what-to-add">Lisää uusi</a></li>
             <li><a href="list-bib" id="bib">Listaa artikkelit BibTex-muodossa</a></li>
             <li><a href="list-norm" id="normal">Listaa artikkelit luettavassa muodossa</a></li>
         </ul>

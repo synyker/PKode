@@ -5,11 +5,11 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 description 'User can add an article'
  
-scenario "user can add an article", {
+scenario "when user adds an article it is saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");
-        element = driver.findElement(By.linkText("Lisää artikkeli"));       
+        element = driver.findElement(By.id("add"));       
         element.click(); 
     }
     when 'information for the article to be added is entered', {
@@ -24,8 +24,15 @@ scenario "user can add an article", {
         element = driver.findElement(By.name("send"));
         element.submit();
     }
-    then 'information is added', {
-        driver.getPageSource().contains("Artikkeli on lisätty!").shouldBe true
+    then 'all articles in readable format are shown', {
+        driver.getPageSource().contains("listaus ymmärrettävässä muodossa").shouldBe true
     }
+
+    and 'article just added is shown in the list', {
+        driver.getPageSource().contains("TestiKirjoittaja").shouldBe true
+    }
+
 }
+
+
  

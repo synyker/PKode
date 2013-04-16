@@ -17,8 +17,11 @@ import ohtu.miniprojekti.domain.Reference;
 import org.springframework.stereotype.Component;
 
 /**
- *
- * @author jonne
+ * ReferenceRepositoru handles database connections.
+ * 
+ * There are methods for example for adding a reference and listing all added references.
+ * 
+ * @author jonne, krista, markus
  */
 
 @Component
@@ -29,8 +32,20 @@ public class ReferenceRepository {
         H2, SQLite
     }
     
+    /**
+     * If no parameter is given for the constructor, Database is initialised as SQLite
+     */
     public ReferenceRepository() {
-        this.server = initializeDatabase(false, Database.SQLite);
+        this.server = initializeDatabase(true, Database.SQLite);
+    }
+    
+    /**
+     * This constructor takes as a parameter the type of Database(H2 or SQLite)
+     * @param dropAndCreateDatabase boolean whether to drop and create the database
+     * @param db 
+     */
+    public ReferenceRepository(boolean dropAndCreateDatabase, Database db) {
+        this.server = initializeDatabase(dropAndCreateDatabase, db);
     }
     
     private static EbeanServer initializeDatabase(boolean dropAndCreateDatabase, Database db) {
@@ -52,7 +67,6 @@ public class ReferenceRepository {
             sqLite.setDriver("org.sqlite.JDBC");
             sqLite.setUsername("reference");
             sqLite.setPassword("reference");
-            //sqLite.setUrl("jdbc:sqlite:/home/mluukkai/sqlite/kannat/beer.db");
             sqLite.setUrl("jdbc:sqlite:reference.db");
             config.setDataSourceConfig(sqLite);
             config.setDatabasePlatform(new SQLitePlatform());
@@ -73,11 +87,39 @@ public class ReferenceRepository {
         return EbeanServerFactory.create(config);
     }
     
+//    public void reInitialise(boolean dropAndCreateDatabase, Database db) {
+//        this.server = initializeDatabase(dropAndCreateDatabase, db);
+//    }
+    
+    /**
+     * Adds a Reference to the Databse
+     * @param reference 
+     */
     public void addArticle(Reference reference) {
-        server.save(reference);     
+        reference = checkThatTextidUnique(reference);
+        server.save(reference);
     }
     
-    public List getList() {
+    private Reference checkThatTextidUnique(Reference reference) {
+        int amount = 0;
+        List<Reference> allreferences = getList();
+        for (Reference ref : allreferences) {
+            if (ref.getTextid().contains(reference.getTextid())) {
+                amount++;
+            }
+        }
+        if (amount != 0) {
+            char c = (char) (96+amount);
+            reference.setTextid(reference.getTextid().concat(""+c));
+        }
+        return reference;
+    }
+    
+    /**
+     * returns a list containing all the references in the database
+     * @return 
+     */
+    public List<Reference> getList() {
         return this.server.find(Reference.class).findList();
     }
     

@@ -74,15 +74,6 @@ public class ReferenceController {
      */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String postAdd(HttpServletRequest request, HttpServletResponse response) {
-//        Reference reference = new Reference(request.getParameter("author"),
-//                request.getParameter("title"),
-//                request.getParameter("journal"),
-//                request.getParameter("volume"),
-//                request.getParameter("number"),
-//                request.getParameter("year"),
-//                request.getParameter("pages"),
-//                request.getParameter("publisher"),
-//                request.getParameter("address"));
         Map<String,String[]> map = request.getParameterMap();
         rs.addArticle(new Reference(map));
         List<Reference> list = rs.getList();

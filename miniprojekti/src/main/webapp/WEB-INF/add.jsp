@@ -58,12 +58,12 @@
                     <p>Title:<input type="text" name="title"/></p>
                     <p>Book title:<input type="text" name="booktitle"/></p>
                     <p>Year:<input type="text" name="year"/></p>
+                    <p>Month:<input type="text" name="month"/></p>
                     <p>Editor:<input type="text" name="editor"/></p>
                     <p>Pages:<input type="text" name="pages"/></p>
                     <p>Organisation:<input type="text" name="organisation"/></p>
                     <p>Publisher:<input type="text" name="publisher"/></p>
                     <p>Address:<input type="text" name="address"/></p>
-                    <p>Month:<input type="text" name="month"/></p>
                     <p>Note:<input type="text" name="note"/></p>
                     <input type="hidden" name="type" value="${type}"/>
                     <input name="send" type="submit" value="Send" />

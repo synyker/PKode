@@ -45,6 +45,11 @@
             <c:if test="${not empty reference.year}">
                 <p>Year: ${reference.year}</p>
             </c:if>
+                
+            <c:if test="${not empty reference.month}">
+                <p>Month: ${reference.month}</p>
+            </c:if>
+                
             <c:if test="${not empty reference.pages}">
                 <p>Pages: ${reference.pages}</p>
             </c:if>
@@ -54,6 +59,28 @@
             <c:if test="${not empty reference.address}">
                 <p>Address: ${reference.address}</p>
             </c:if>
+                
+            <c:if test="${not empty reference.series}">
+                <p>Series: ${reference.series}</p>
+            </c:if>
+                
+            <c:if test="${not empty reference.edition}">
+                <p>Edition ${reference.edition}</p>
+            </c:if>
+                
+            <c:if test="${not empty reference.note}">
+                <p>Note: ${reference.note}</p>
+            </c:if>
+                
+            <c:if test="${not empty reference.editor}">
+                <p>Editor: ${reference.editor}</p>
+            </c:if>
+                
+            <c:if test="${not empty reference.organisation}">
+                <p>Organisation: ${reference.organisation}</p>
+            </c:if>
+                
+            
 
             <p>---------</p>
         </c:forEach>

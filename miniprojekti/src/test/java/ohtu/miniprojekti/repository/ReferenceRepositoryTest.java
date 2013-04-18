@@ -43,6 +43,7 @@ public class ReferenceRepositoryTest {
         map.put("title","Otsikko");
         map.put("journal","Lehti");
         map.put("year","2009");
+        map.put("textid", "T09");
         reference = new Reference(map);
     }
     
@@ -100,7 +101,7 @@ public class ReferenceRepositoryTest {
      public void addedArticleHasCorrectTextIdWhenTwoWithSimilarID() {
          rr.addArticle(reference);
          Map<String,String> map1 = map;
-         map1.put("author", "Tekijä; Tamppaaja");
+         map1.put("textid", "TT09");
          rr.addArticle(new Reference(map));
          assertEquals("TT09", rr.getList().get(1).getTextid());
      }

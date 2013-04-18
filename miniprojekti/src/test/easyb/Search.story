@@ -6,7 +6,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 description 'user search references with the name of the author'
  
-scenario "user can search for references with a certain author's name", {
+scenario "user can search for references with a certain authors name", {
     given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");
@@ -21,7 +21,7 @@ scenario "user can search for references with a certain author's name", {
         element = driver.findElement(By.name("send"));
         element.submit();
     }
-    when 'article is added successfully we can search for it with the name of it's author' {
+    when 'article is added successfully we can search for it with the name of its author' {
         element = driver.findElement(By.id("search"));
         element.sendKeys("Testaaja, Kalle");
         element = driver.findElement(By.name("send"));
@@ -31,7 +31,7 @@ scenario "user can search for references with a certain author's name", {
         driver.getPageSource().contains("Testaaja, Kalle").shouldBe true
 }
 
-scenario "user can search for references with a certain author's name and it won't return other authors' articles" {
+scenario "user can search for references with a certain author's name and it wont return other authors articles" {
 given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");
@@ -52,7 +52,7 @@ given 'an article has been added to database', {
         element = driver.findElement(By.name("send"));
         element.submit();
 }
- then 'we won't see any articles' {
+ then 'we wont see any articles' {
         driver.getPageSource().contains("Kirjoittaja, Pekka").shouldBe false
 }
 }

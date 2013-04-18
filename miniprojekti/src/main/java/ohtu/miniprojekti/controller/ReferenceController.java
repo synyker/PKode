@@ -62,16 +62,6 @@ public class ReferenceController {
         return "add";
     }
 
-    /**
-     * Defines what happens when an article is added.
-     *
-     * The info from all fields is saved into a Reference object, which is then
-     * added to the database.
-     *
-     * @param request
-     * @param response
-     * @return
-     */
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String postAdd(HttpServletRequest request, HttpServletResponse response) {
         Map<String,String[]> map = request.getParameterMap();
@@ -81,6 +71,7 @@ public class ReferenceController {
         return "list-norm";
     }
     
+    
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public String searchAuthor(HttpServletRequest request, HttpServletResponse response) {
         List<Reference> list = rs.findList(request.getParameter("author"));
@@ -88,13 +79,6 @@ public class ReferenceController {
         return "list-norm";
     }
 
-    /**
-     * Defnes what happens when we want to list all references in BibTex Format.
-     *
-     * @param request
-     * @param response
-     * @return
-     */
     @RequestMapping(value = "list-bib", method = RequestMethod.GET)
     public String getBib(HttpServletRequest request, HttpServletResponse response) {
         List<Reference> list = rs.getBibTexList();
@@ -102,14 +86,7 @@ public class ReferenceController {
         return "list-bib";
     }
 
-    /**
-     * Defines what happens when we want to list all references in readable
-     * format.
-     *
-     * @param request
-     * @param response
-     * @return
-     */
+
     @RequestMapping(value = "list-norm", method = RequestMethod.GET)
     public String getNorm(HttpServletRequest request, HttpServletResponse response) {
         List<Reference> list = rs.getList();
@@ -117,7 +94,5 @@ public class ReferenceController {
 
         return "list-norm";
     }
-//    public ReferenceRepository getReferenceRepository() {
-//        return rr;
-//    }
+
 }

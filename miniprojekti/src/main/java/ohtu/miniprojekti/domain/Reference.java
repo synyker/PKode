@@ -62,7 +62,7 @@ public class Reference {
         this.note = map.get("note");
         this.editor = map.get("editor");
         this.organisation = map.get("organisation");
-        this.textid = generateTextId(this.author, this.year);
+        this.textid = map.get("textid");
     }
 
     public String getType() {
@@ -71,43 +71,6 @@ public class Reference {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    /**
-     * Constructor that takes all the information needed for an inproceedings as
-     * a parameter.
-     *
-     * If there is no information for a field, an empty string should be saved.
-     *
-     * @param author
-     * @param title
-     * @param booktitle
-     * @param year
-     * @param pages
-     * @param publisher
-     * @param address
-     */
-    
-    /**
-     * Generates a textid for the reference.
-     * 
-     * Textid is the first letter of all lastnames of authors and two of the last numbers in the year.
-     * It is assumed that authors are given in a format "Lastname1, Firstname1 ; Lastname2, Firstname2".
-     * It does not check whether the id is unique. This must be done before saving to the database.
-     * 
-     * @param author 
-     */
-    private String generateTextId(String author, String year) {
-        String id = "";
-        String[] authors = author.split(";");
-        for (int i = 0; i < authors.length; i++) {
-            id += authors[i].trim().substring(0, Math.min(1, authors[i].length()));    
-        }
-        if (year.length() > 1) {
-            id += year.substring(year.length()-2, year.length());
-        }
-        
-        return id;
     }
 
     public void setId(Integer id) {

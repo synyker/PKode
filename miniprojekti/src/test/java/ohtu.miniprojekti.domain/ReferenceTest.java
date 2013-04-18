@@ -71,32 +71,6 @@ public class ReferenceTest {
     }
 
     @Test
-    public void textIdGeneratedCorrectlyWhenOneAuthor() {
-        assertEquals("T09", reference.getTextid());
-    }
-
-    @Test
-    public void textIdGeneratedCorrectlyWhenMoreThanOneAuthor() {
-        map.put("author", "Tekijä, Kalle; Sukunimi, Seppo; ääpeli, olli");
-        reference = new Reference(map);
-        assertEquals("TSä09", reference.getTextid());
-    }
-
-    @Test
-    public void textIdGeneratedCorrectlyWhenMoreThanOneAuthorAndWhiteSpaces() {
-        map.put("author", "Tekijä, Kalle   ; Sukunimi, Seppo  ;  ääpeli, olli");
-        reference = new Reference(map);
-        assertEquals("TSä09", reference.getTextid());
-    }
-
-    @Test
-    public void textIdGeneratedCorrectlyWhenYearTooLong() {
-        map.put("year", "20000000000013");
-        reference = new Reference(map);
-        assertEquals("T13", reference.getTextid());
-    }
-
-    @Test
     public void typeCorrectWhenAddingBook() {
         map.put("type","Book");
         reference = new Reference(map);
@@ -108,20 +82,5 @@ public class ReferenceTest {
         map.put("type", "InProceedings");
         reference = new Reference(map);
         assertEquals("InProceedings", reference.getType());
-    }
-    
-    @Test
-    public void textidWorksIfNoAuthorGiven() {
-        map.put("author", "");
-        reference = new Reference(map);
-        assertEquals("09", reference.getTextid());
-    }
-    
-    @Test
-    public void textidWorksIfNoYearGiven() {
-        map.put("author", "Kalle");
-        map.put("year","");
-        reference = new Reference(map);
-        assertEquals("K", reference.getTextid());
     }
 }

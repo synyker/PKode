@@ -90,7 +90,7 @@ public class ReferenceController {
      */
     @RequestMapping(value = "list-bib", method = RequestMethod.GET)
     public String getBib(HttpServletRequest request, HttpServletResponse response) {
-        List<Reference> list = rs.getList();
+        List<Reference> list = rs.getBibTexList();
         request.setAttribute("list", list);
         return "list-bib";
     }

@@ -27,7 +27,7 @@ scenario "user can search for references with a certain authors name", {
         element = driver.findElement(By.name("send"));
         element.submit();
 }
-    then 'we will see all the articles with the author's name on it' {
+    then 'we will see all the articles with the authors name on it' {
         driver.getPageSource().contains("Testaaja, Kalle").shouldBe true
 }
 

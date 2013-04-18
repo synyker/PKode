@@ -80,6 +80,13 @@ public class ReferenceController {
         request.setAttribute("list", list);
         return "list-norm";
     }
+    
+    @RequestMapping(value = "search", method = RequestMethod.GET)
+    public String searchAuthor(HttpServletRequest request, HttpServletResponse response) {
+        List<Reference> list = rs.findList(request.getParameter("author"));
+        request.setAttribute("list", list);
+        return "list-norm";
+    }
 
     /**
      * Defnes what happens when we want to list all references in BibTex Format.

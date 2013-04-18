@@ -1,5 +1,5 @@
 create table Reference (
-  id                        integer not null,
+  id                        integer primary key AUTOINCREMENT,
   textid                    varchar(255),
   type                      varchar(255),
   author                    varchar(255),
@@ -17,11 +17,8 @@ create table Reference (
   month                     varchar(255),
   note                      varchar(255),
   editor                    varchar(255),
-  organisation              varchar(255),
-  constraint pk_Reference primary key (id))
+  organisation              varchar(255))
 ;
-
-create sequence Reference_seq;
 
 
 

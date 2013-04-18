@@ -122,6 +122,10 @@ public class ReferenceService {
         
         return id;
     }
+
+    public List<Reference> findList(String author) {
+        return rr.findList(author);
+    }
     
     
     

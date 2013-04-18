@@ -19,7 +19,7 @@
         
         <p>Hae viitteitä kirjoittajan perusteella:
             <form action="search" method="GET">
-                <input type="text" name="author">
+                <input type="text" id="search" name="author">
                 <input name="send" type="submit" value="send"/>
             </form>
         </p>
@@ -29,6 +29,9 @@
 
             <c:if test="${not empty reference.author}">
                 <p>Author: ${reference.author}</p>
+            </c:if>
+            <c:if test="${not empty reference.booktitle}">
+                <p>Booktitle: ${reference.booktitle}</p>
             </c:if>
             <c:if test="${not empty reference.title}">
                 <p>Title: ${reference.title}</p>

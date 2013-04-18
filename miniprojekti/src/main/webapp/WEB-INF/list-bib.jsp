@@ -24,6 +24,10 @@
                 <c:if test="${not empty reference.author}">
                     <p>author = {${reference.author}},</p>
                 </c:if>
+                
+                <c:if test="${not empty reference.booktitle}">
+                    <p>booktitle = {${reference.booktitle}},</p>
+                </c:if>
                     
                 <c:if test="${not empty reference.title}">
                     <p>title = {${reference.title}},</p>

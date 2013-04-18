@@ -27,6 +27,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReferenceRepository {
     private EbeanServer server;
+
+    public List<Reference> findList(String author) {
+        return server.find(Reference.class).where().like("author","%%"+author+"%%").findList();
+    }
     
     public enum Database {
         H2, SQLite

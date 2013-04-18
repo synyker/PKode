@@ -105,4 +105,16 @@ public class ReferenceRepositoryTest {
          rr.addArticle(new Reference(map));
          assertEquals("TT09", rr.getList().get(1).getTextid());
      }
+     
+     @Test
+     public void findListReturnsCorrectAmountOfReferences() {
+         rr.addArticle(reference);
+         assertEquals(1, rr.findList("Tekijä").size());
+     }
+     
+      @Test
+     public void findListReturnsEmptyListWhenAUthorNotFound() {
+         rr.addArticle(reference);
+         assertEquals(0, rr.findList("eilöydy").size());
+     }
 }

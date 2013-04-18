@@ -28,9 +28,6 @@ import org.springframework.stereotype.Component;
 public class ReferenceRepository {
     private EbeanServer server;
 
-    public List<Reference> findList(String author) {
-        return server.find(Reference.class).where().like("author","%%"+author+"%%").findList();
-    }
     
     public enum Database {
         H2, SQLite
@@ -96,7 +93,7 @@ public class ReferenceRepository {
 //    }
     
     /**
-     * Adds a Reference to the Databse
+     * Adds a Reference to the Databsae
      * @param reference 
      */
     public void addArticle(Reference reference) {
@@ -104,6 +101,15 @@ public class ReferenceRepository {
         server.save(reference);
     }
     
+    /**
+     * Checks that the textid set for a reference is unique.
+     * 
+     * If it is not unique, a letter (a, b, c..) is added into the end to make
+     * it unique.
+     * 
+     * @param reference to be checked
+     * @return reference with unique textid
+     */
     private Reference checkThatTextidUnique(Reference reference) {
         int amount = 0;
         List<Reference> allreferences = getList();
@@ -125,6 +131,16 @@ public class ReferenceRepository {
      */
     public List<Reference> getList() {
         return this.server.find(Reference.class).findList();
+    }
+    
+    /**
+     * returns a list of references where author field includes the given String
+     * 
+     * @param author string that we are trying to find
+     * @return references containing the string in the author field
+     */
+     public List<Reference> findList(String author) {
+        return server.find(Reference.class).where().like("author","%"+author+"%").findList();
     }
     
 }

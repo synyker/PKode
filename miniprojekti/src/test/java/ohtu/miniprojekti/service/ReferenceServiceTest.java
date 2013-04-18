@@ -147,5 +147,17 @@ public class ReferenceServiceTest {
         assertEquals("Tekijä, Kalle and Sukunimi, Seppo and ääpeli, olli", rs.getList().get(0).getAuthor());
     }
     
+    @Test
+    public void searchDoesntFindAnythinWhenWrongAuthor() {
+        rs.addArticle(map);
+        assertEquals(0, rs.findList("eilöydy").size());
+    }
+    
+     @Test
+    public void searcFindsWhenRightAuthor() {
+        rs.addArticle(map);
+        assertEquals(1, rs.findList("Teki").size());
+    }
+    
  
 }

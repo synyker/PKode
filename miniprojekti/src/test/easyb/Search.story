@@ -31,7 +31,7 @@ scenario "user can search for references with a certain authors name", {
         driver.getPageSource().contains("Testaaja, Kalle").shouldBe true
 }
 
-scenario "user can search for references with a certain author's name and it wont return other authors articles" {
+scenario "user can search for references with a certain authors name and it wont return other authors articles" {
 given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8080");

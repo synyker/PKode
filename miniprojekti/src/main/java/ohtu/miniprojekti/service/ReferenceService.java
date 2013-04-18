@@ -24,9 +24,7 @@ public class ReferenceService {
     @Autowired
     private ReferenceRepository rr;
     
-    public ReferenceService() {
-        
-    }
+    public ReferenceService() {}
 
     public void addArticle(Map<String,String[]> map) {
         Map<String,String> values = modifyMap(map);
@@ -41,13 +39,13 @@ public class ReferenceService {
     public List<Reference> getBibTexList() {
         List<Reference> references = rr.getList();
         for (Reference reference : references) {
-           reference.setAuthor(editScandinavianLetters(reference.getAuthor()));
-           reference.setTitle(editScandinavianLetters(reference.getTitle()));
-           reference.setJournal(editScandinavianLetters(reference.getJournal()));
-           reference.setAddress(editScandinavianLetters(reference.getAddress()));
-           reference.setPublisher(editScandinavianLetters(reference.getPublisher()));
-           reference.setBooktitle(editScandinavianLetters(reference.getBooktitle()));
-           reference.setTextid(editScandinavianLetters(reference.getTextid()));
+            reference.setAuthor(editScandinavianLetters(reference.getAuthor()));
+            reference.setTitle(editScandinavianLetters(reference.getTitle()));
+            reference.setJournal(editScandinavianLetters(reference.getJournal()));
+            reference.setAddress(editScandinavianLetters(reference.getAddress()));
+            reference.setPublisher(editScandinavianLetters(reference.getPublisher()));
+            reference.setBooktitle(editScandinavianLetters(reference.getBooktitle()));
+            reference.setTextid(editScandinavianLetters(reference.getTextid()));
         }
         return references;
     }
@@ -71,8 +69,11 @@ public class ReferenceService {
             String value = ((String[]) pairs.getValue())[0];
             map1.put(key, value);
         }
-        
         return map1;
+    }
+    
+    public void setRepository(ReferenceRepository repo) {
+        this.rr = repo;
     }
     
     

@@ -5,7 +5,11 @@ package ohtu.miniprojekti.service;
  * and open the template in the editor.
  */
 
+import java.util.HashMap;
+import java.util.Map;
 import ohtu.miniprojekti.domain.Reference;
+import ohtu.miniprojekti.repository.ReferenceRepository;
+import org.h2.engine.Database;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -34,17 +38,25 @@ public class ReferenceServiceTest {
     @Before
     public void setUp() {
         rs = new ReferenceService();
+        rs.setRepository(new ReferenceRepository(true,ReferenceRepository.Database.H2));
     }
     
     @After
     public void tearDown() {
     }
  
-//     @Test
-//     public void ListBibTexReturnsNoScandicLettersWhenOneAdded() {
-//         rs.addArticle(new Reference("Tekijä", "Otsikko", "Lehti", "", "", "2009", "", "", ""));
-//         assertEquals("Tekij\\\"{a}yr\\\"", rs.getBibTexList().get(0));
-//     }
+    @Test
+    public void ListBibTexReturnsNoScandicLettersWhenOneAdded() {
+         Map<String,String[]> map = new HashMap<String,String[]>();
+         String[] arr = new String[1];
+         arr[0] = "Tekijä";
+         map.put("author",arr);
+         arr = new String[1];
+         arr[0] = "2009";
+         map.put("year",arr);
+         rs.addArticle(map);
+         assertEquals("Tekij\\\"{a}yr\\\"", rs.getBibTexList().get(0).getAuthor());
+    }
     
     @Test
     public void editingRemovesScandicLetters() {
@@ -52,7 +64,30 @@ public class ReferenceServiceTest {
     }
     
     @Test
-    public void editingWorksWithEmptyString() {
+    public void removingScandicLettersReturnsNullIfParameterIsNull() {
+        assertEquals(null, rs.editScandinavianLetters(null));
+    }
+    
+    @Test
+    public void removingScandicLettersReturnsEmptyStringIfParameterIsEmptyString() {
         assertEquals("", rs.editScandinavianLetters(""));
+    }
+    
+    @Test
+    public void getListReturnsListWithCorrectSizeWhenNoneAdded() {
+        assertEquals(0,rs.getList().size());
+    }
+    
+    @Test
+    public void getListReturnsListWithCorrectSizeWhenOneAdded() {
+        Map<String,String[]> map = new HashMap<String,String[]>();
+        String[] arr = new String[1];
+        arr[0] = "Tekijä";
+        map.put("author",arr);
+        arr = new String[1];
+        arr[0] = "2009";
+        map.put("year",arr);
+        rs.addArticle(map);
+        assertEquals(1,rs.getList().size());
     }
 }

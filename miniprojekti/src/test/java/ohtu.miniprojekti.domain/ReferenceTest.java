@@ -117,9 +117,8 @@ public class ReferenceTest {
         assertEquals("09", reference.getTextid());
     }
     
-     @Test
+    @Test
     public void textidWorksIfNoYearGiven() {
-        String[] arr = new String[1]; 
         map.put("author", "Kalle");
         map.put("year","");
         reference = new Reference(map);

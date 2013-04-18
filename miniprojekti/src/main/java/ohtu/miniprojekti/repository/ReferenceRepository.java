@@ -28,7 +28,7 @@ import org.springframework.stereotype.Component;
 public class ReferenceRepository {
     private EbeanServer server;
     
-    enum Database {
+    public enum Database {
         H2, SQLite
     }
     

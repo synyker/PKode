@@ -37,4 +37,40 @@ scenario "When references are listed in textarea there are 4 whitespaces in  fro
         driver.getPageSource().contains("<textarea rows=\"20\" cols=\"100\">@Article").shouldBe true
     }
 }
+
+scenario "When references are listed in the file there are 4 whitespaces in  front of each line", {
+    given 'an article has been added to database', {
+        driver = new HtmlUnitDriver();
+        driver.get("http://localhost:8736");
+        element = driver.findElement(By.id("what-to-add"));
+        element.click();
+        element = driver.findElement(By.id("addA"));
+        element.click();
+        element = driver.findElement(By.name("author"));
+        element.sendKeys("Testaaja, Kalle");
+        element = driver.findElement(By.name("title"));
+        element.sendKeys("Hieno Juttu");
+        element = driver.findElement(By.name("send"));
+        element.submit();
+    }
+    when 'command list all in BibTex format is selected', {
+        driver.get("http://localhost:8736");
+        element = driver.findElement(By.id("bib"));
+        element.click();
+        
+        element = driver.findElement(By.id("filename"));
+        element.sendKeys("integration-test");
+        element = driver.findElement(By.id("download"));
+        element.click();
+    }
+    then 'the file should be loaded', {
+        driver.getCurrentUrl().contains("integration-test").shouldBe true
+    }
+    and 'there are 4 whitespaces in front of the author field', {
+        driver.getPageSource().contains("    author = {Testaaja, Kalle}").shouldBe true
+    }
+    and 'the added article is listed in the file', {
+        driver.getPageSource().contains("@Article").shouldBe true
+    }
+}
  

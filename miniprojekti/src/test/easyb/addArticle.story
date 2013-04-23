@@ -8,7 +8,7 @@ description 'User can add an article'
 scenario "when user adds an article it is saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8080");
+        driver.get("http://localhost:8736");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));

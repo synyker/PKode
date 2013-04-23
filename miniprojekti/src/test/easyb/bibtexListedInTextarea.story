@@ -4,7 +4,22 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 
 
-description 'user can list all added articles in BibTex format'
+description 'user can list all added articles in BibTex format in a textfield'
+
+scenario "Page that lists all references in bibtex format includes a text field for the references", {
+    given 'command list all in bibtex format is selected', {
+         driver = new HtmlUnitDriver();
+         driver.get("http://localhost:8736");
+         element = driver.findElement(By.id("bib"));
+         element.click();
+    }
+    when 'the page has loaded', {
+
+    }
+    then 'there is a textfield on the page', {
+         driver.getPageSource().contains("textarea").shouldBe true
+    }
+}
  
 scenario "after adding an article to database it is shown in the list in BibTex Format", {
     given 'an article has been added to database', {
@@ -31,6 +46,9 @@ scenario "after adding an article to database it is shown in the list in BibTex 
     }
     and 'the added article is listed', {
         driver.getPageSource().contains("author = {Testaaja, Kalle}").shouldBe true
+    }
+    and 'the added article is listed inside a textfield', {
+        driver.getPageSource().contains("<textarea rows="10" cols="80">@Article").shouldBe true
     }
 }
  

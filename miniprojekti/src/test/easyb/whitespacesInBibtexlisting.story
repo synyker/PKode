@@ -4,9 +4,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 
 
-description 'user can list all added articles in BibTex format'
+description 'user can list all added articles in BibTex format and all lines except the title and ending have 4 whitespaces in front of them'
+
  
-scenario "after adding an article to database it is shown in the list in BibTex Format", {
+scenario "When references are listed in textarea there are 4 whitespaces in  front of each line", {
     given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
         driver.get("http://localhost:8736");
@@ -29,8 +30,11 @@ scenario "after adding an article to database it is shown in the list in BibTex 
     then 'title and articles in BibTex Format should be printed', {
         driver.getPageSource().contains("listaus BibTex").shouldBe true
     }
-    and 'the added article is listed', {
-        driver.getPageSource().contains("author = {Testaaja, Kalle}").shouldBe true
+    and 'there are 4 whitespaces in front of the author field', {
+        driver.getPageSource().contains("    author = {Testaaja, Kalle}").shouldBe true
+    }
+    and 'the added article is listed inside a textfield', {
+        driver.getPageSource().contains("<textarea rows="10" cols="80">@Article").shouldBe true
     }
 }
  

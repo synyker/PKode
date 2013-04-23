@@ -9,7 +9,7 @@ description 'user can directly access the list of references in BibTex format fr
 scenario "user can list all added articles in readable format", {
     given 'command list all in readable format selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8080");
+        driver.get("http://localhost:8736");
         element = driver.findElement(By.id("normal"));       
         element.click(); 
     }

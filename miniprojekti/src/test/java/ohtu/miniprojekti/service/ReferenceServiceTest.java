@@ -49,6 +49,9 @@ public class ReferenceServiceTest {
         arr = new String[1];
         arr[0] = "2009";
         map.put("year", arr);
+        arr = new String[1];
+        arr[0] = "Article";
+        map.put("type", arr);
     }
 
     @After
@@ -137,7 +140,7 @@ public class ReferenceServiceTest {
         rs.addArticle(map);
         assertEquals("T", rs.getList().get(0).getTextid());
     }
-    
+
     @Test
     public void authorFieldModifiedCorrectly() {
         arr = new String[1];
@@ -146,18 +149,31 @@ public class ReferenceServiceTest {
         rs.addArticle(map);
         assertEquals("Tekijä, Kalle and Sukunimi, Seppo and ääpeli, olli", rs.getList().get(0).getAuthor());
     }
-    
+
     @Test
     public void searchDoesntFindAnythinWhenWrongAuthor() {
         rs.addArticle(map);
         assertEquals(0, rs.findList("eilöydy").size());
     }
-    
-     @Test
+
+    @Test
     public void searcFindsWhenRightAuthor() {
         rs.addArticle(map);
         assertEquals(1, rs.findList("Teki").size());
     }
-    
- 
+
+    @Test
+    public void bibtexStringCorrectWhenOneReferenceAdded() {
+        rs.addArticle(map);
+        assertEquals("@Article{T09,\n    author = {Tekij\\\"{a}yr\\\"},\n    year = {2009},\n}\n", rs.generateBibtexString());
+    }
+
+    @Test
+    public void bibtexStringCorrectWhenEmptyFieldsAdded() {
+        arr = new String[1];
+        arr[0] = "";
+        map.put("journal", arr);
+        rs.addArticle(map);
+        assertEquals("@Article{T09,\n    author = {Tekij\\\"{a}yr\\\"},\n    year = {2009},\n}\n", rs.generateBibtexString());
+    }
 }

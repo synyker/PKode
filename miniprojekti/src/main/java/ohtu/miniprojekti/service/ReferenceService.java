@@ -44,6 +44,15 @@ public class ReferenceService {
     }
     
     /**
+     * Returns a list of all references where the author field includes the string given as a parameter.
+     * @param author
+     * @return 
+     */
+    public List<Reference> findList(String author) {
+        return rr.findList(author);
+    }
+    
+    /**
      * Returns a list of references in BibTex Format.
      * 
      * Scandic letters are replaced with appropriate characters.
@@ -76,6 +85,8 @@ public class ReferenceService {
         
         text = text.replace("ä", "\\\"{a}yr\\\"");
         text = text.replace("ö", "\\\"{o}yr\\\"");
+        text = text.replace("Ä", "\\\"{A}yr\\\"");
+        text = text.replace("Ö", "\\\"{O}yr\\\"");
         return text;
     }
 
@@ -122,11 +133,41 @@ public class ReferenceService {
         
         return id;
     }
-
-    public List<Reference> findList(String author) {
-        return rr.findList(author);
+    
+    public String generateBibtexString() {
+        List<Reference> bibtexlist = getList();
+        String returnable = "";
+        for (Reference reference : bibtexlist) {
+            returnable += "@" + reference.getType() + "{" + reference.getTextid()+","+"\n";
+            returnable += checkField("author", reference.getAuthor())
+                            + checkField("booktitle", reference.getBooktitle())
+                            + checkField("title", reference.getTitle())
+                            + checkField("journal", reference.getJournal())
+                            + checkField("volume", reference.getVolume())
+                            + checkField("number", reference.getNumber())
+                            + checkField("year", reference.getYear())
+                            + checkField("month", reference.getMonth())
+                            + checkField("pages", reference.getPages())
+                            + checkField("publisher", reference.getPublisher())
+                            + checkField("address", reference.getAddress())
+                            + checkField("series", reference.getSeries())
+                            + checkField("edition", reference.getEdition())
+                            + checkField("note", reference.getNote())
+                            + checkField("editor", reference.getEditor())
+                            + checkField("organisation", reference.getOrganisation());
+            returnable += "}\n";
+        }
+        return returnable;
     }
     
+    private String checkField(String fieldname, String field) {
+        if (field != null && field != "") {
+            field = editScandinavianLetters(field);
+            return "" + "    " + fieldname + " = {" + field + "},"+"\n";
+        } else {
+            return "";
+        }
+    }
     
     
 }

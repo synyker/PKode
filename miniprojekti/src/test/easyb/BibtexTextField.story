@@ -9,7 +9,7 @@ description 'user can list all added articles in BibTex format in a textfield'
 scenario "Page that lists all references in bibtex format includes a text field for the references", {
     given 'command list all in bibtex format is selected', {
          driver = new HtmlUnitDriver();
-         driver.get("http://localhost:8080");
+         driver.get("http://localhost:8736");
          element = driver.findElement(By.id("bib"));
          element.click();
     }

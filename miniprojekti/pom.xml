@@ -240,14 +240,12 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>7.4.2.v20110526</version>
                 <configuration>
-                    
                     <systemProperties>                        
                         <systemProperty>
                             <name>jetty.port</name>
                             <value>8736</value>
                         </systemProperty>                        
                     </systemProperties>
-                 
                     
                     <scanIntervalSeconds>5</scanIntervalSeconds>
                     <reload>automatic</reload>

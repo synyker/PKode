@@ -34,7 +34,7 @@ scenario "When references are listed in textarea there are 4 whitespaces in  fro
         driver.getPageSource().contains("    author = {Testaaja, Kalle}").shouldBe true
     }
     and 'the added article is listed inside a textfield', {
-        driver.getPageSource().contains("<textarea rows="10" cols="80">@Article").shouldBe true
+        driver.getPageSource().contains("<textarea rows=\"10\" cols=\"80\">@Article").shouldBe true
     }
 }
  

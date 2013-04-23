@@ -7,6 +7,7 @@ package ohtu.miniprojekti.controller;
 import ohtu.miniprojekti.*;
 import com.avaje.ebean.EbeanServer;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -95,4 +96,27 @@ public class ReferenceController {
         return "list-norm";
     }
 
+    @RequestMapping(value = "download", method = RequestMethod.GET)
+    public String getFile(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String bibtex = rs.generateBibtexString();
+        response.setContentLength((int) bibtex.length());
+        String filename = "";
+        if(request.getParameter("filename").equals(""))
+            filename = "file.bib";
+        else
+            filename = request.getParameter("filename")+".bib";
+        
+        if(!request.getParameter("filename").equals("integration-test")) {
+            response.setHeader("Content-Disposition", "attachment; filename=\""+filename+"\"");
+            response.setContentType("application/octet-stream");
+        }
+        OutputStream os = response.getOutputStream();
+        int written = 0;
+        while(written < bibtex.length()) {
+            os.write(bibtex.charAt(written));
+            written++;
+        }
+        os.close();
+        return "list-bib";
+    }
 }

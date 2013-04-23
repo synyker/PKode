@@ -18,7 +18,13 @@
         <a href="front"><< Takaisin etusivulle <<</a>
         <h1>Viitteiden listaus BibTex-muodossa</h1>
         
-        <textarea rows="10" cols="80">${bibstring}</textarea>
+        <form action="download" method="GET">
+            <label>Syötä nimi tiedostolle <input type="text" id="filename" name="filename">.bib</label>
+                <input id="download" name="submit" type="submit" value="Lataa"/>
+        </form>
+        <br>
+        <br>
+        <textarea rows="20" cols="100">${bibstring}</textarea>
         
     </body>
 </html>

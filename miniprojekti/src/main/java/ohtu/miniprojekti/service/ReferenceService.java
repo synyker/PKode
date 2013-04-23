@@ -161,7 +161,7 @@ public class ReferenceService {
     }
     
     private String checkField(String fieldname, String field) {
-        if (field != null && field != "") {
+        if (field != null && !field.equals("")) {
             field = editScandinavianLetters(field);
             return "" + "    " + fieldname + " = {" + field + "},"+"\n";
         } else {

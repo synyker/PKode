@@ -28,6 +28,10 @@ import org.springframework.stereotype.Component;
 public class ReferenceRepository {
     private EbeanServer server;
 
+    public void editArticle(Reference r) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
     public enum Database {
         H2, SQLite
@@ -108,6 +112,10 @@ public class ReferenceRepository {
     public void deleteArticle(String id) {
         List<Reference> reference = server.find(Reference.class).where().like("id", id).findList();
         server.delete(reference);
+    }
+    
+    public void editReference(Reference Reference) {
+        
     }
     
     /**

@@ -10,8 +10,10 @@ import java.util.List;
 import java.util.Map;
 import ohtu.miniprojekti.domain.Reference;
 import ohtu.miniprojekti.repository.ReferenceRepository;
+import ohtu.miniprojekti.validation.BibTexValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import ohtu.miniprojekti.validation.FieldValidator;
 
 /**
  *
@@ -23,7 +25,7 @@ public class ReferenceService {
     
     @Autowired
     private ReferenceRepository rr;
-    
+
     public ReferenceService() {}
 
     public String addArticle(Map<String,String[]> map) {
@@ -57,43 +59,6 @@ public class ReferenceService {
         return rr.findList(author);
     }
     
-//    /**
-//     * Returns a list of references in BibTex Format.
-//     * 
-//     * Scandic letters are replaced with appropriate characters.
-//     * @return  list of all references in the database in BibTex Format
-//     */
-//    public List<Reference> getBibTexList() {
-//        List<Reference> references = rr.getList();
-//        for (Reference reference : references) {
-//            reference.setAuthor(editScandinavianLetters(reference.getAuthor()));
-//            reference.setTitle(editScandinavianLetters(reference.getTitle()));
-//            reference.setJournal(editScandinavianLetters(reference.getJournal()));
-//            reference.setAddress(editScandinavianLetters(reference.getAddress()));
-//            reference.setPublisher(editScandinavianLetters(reference.getPublisher()));
-//            reference.setBooktitle(editScandinavianLetters(reference.getBooktitle()));
-//            reference.setTextid(editScandinavianLetters(reference.getTextid()));
-//        }
-//        return references;
-//    }
-    
-    /**
-     * Replaces scandivanian letters with characters needed for BibTex Format
-     * 
-     * @param text to be edited
-     * @return edited text
-     */
-    public String editScandinavianLetters(String text) {
-        if (text == null || text.equals("")) {
-            return text;
-        }
-        
-        text = text.replace("ä", "\\\"{a}yr\\\"");
-        text = text.replace("ö", "\\\"{o}yr\\\"");
-        text = text.replace("Ä", "\\\"{A}yr\\\"");
-        text = text.replace("Ö", "\\\"{O}yr\\\"");
-        return text;
-    }
 
     /**
      * Changes a Map<String, String[]> into Map<String, String>
@@ -140,53 +105,35 @@ public class ReferenceService {
     }
     
     public String generateBibtexString() {
+        BibTexValidator bibValidator = new BibTexValidator();
         List<Reference> bibtexlist = getList();
         String returnable = "";
         for (Reference reference : bibtexlist) {
             returnable += "@" + reference.getType() + "{" + reference.getTextid()+","+"\n";
-            returnable += checkFieldForBibTex("author", reference.getAuthor())
-                            + checkFieldForBibTex("booktitle", reference.getBooktitle())
-                            + checkFieldForBibTex("title", reference.getTitle())
-                            + checkFieldForBibTex("journal", reference.getJournal())
-                            + checkFieldForBibTex("volume", reference.getVolume())
-                            + checkFieldForBibTex("number", reference.getNumber())
-                            + checkFieldForBibTex("year", reference.getYear())
-                            + checkFieldForBibTex("month", reference.getMonth())
-                            + checkFieldForBibTex("pages", reference.getPages())
-                            + checkFieldForBibTex("publisher", reference.getPublisher())
-                            + checkFieldForBibTex("address", reference.getAddress())
-                            + checkFieldForBibTex("series", reference.getSeries())
-                            + checkFieldForBibTex("edition", reference.getEdition())
-                            + checkFieldForBibTex("note", reference.getNote())
-                            + checkFieldForBibTex("editor", reference.getEditor())
-                            + checkFieldForBibTex("organisation", reference.getOrganisation());
+            returnable += bibValidator.checkFieldForBibTex("author", reference.getAuthor())
+                            + bibValidator.checkFieldForBibTex("booktitle", reference.getBooktitle())
+                            + bibValidator.checkFieldForBibTex("title", reference.getTitle())
+                            + bibValidator.checkFieldForBibTex("journal", reference.getJournal())
+                            + bibValidator.checkFieldForBibTex("volume", reference.getVolume())
+                            + bibValidator.checkFieldForBibTex("number", reference.getNumber())
+                            + bibValidator.checkFieldForBibTex("year", reference.getYear())
+                            + bibValidator.checkFieldForBibTex("month", reference.getMonth())
+                            + bibValidator.checkFieldForBibTex("pages", reference.getPages())
+                            + bibValidator.checkFieldForBibTex("publisher", reference.getPublisher())
+                            + bibValidator.checkFieldForBibTex("address", reference.getAddress())
+                            + bibValidator.checkFieldForBibTex("series", reference.getSeries())
+                            + bibValidator.checkFieldForBibTex("edition", reference.getEdition())
+                            + bibValidator.checkFieldForBibTex("note", reference.getNote())
+                            + bibValidator.checkFieldForBibTex("editor", reference.getEditor())
+                            + bibValidator.checkFieldForBibTex("organisation", reference.getOrganisation());
             returnable += "}\n";
         }
         return returnable;
     }
-    
-    private String checkFieldForBibTex(String fieldname, String field) {
-        if (field != null && !field.equals("")) {
-            field = editScandinavianLetters(field);
-            return "" + "    " + fieldname + " = {" + field + "},"+"\n";
-        } else {
-            return "";
-        }
-    }
+   
 
     private String validate(Map<String, String> values) {
-        /**
-         * Tässä käy läpi nuo kaikki arvot siellä mapissa jotka vaatii validointia
-         * eli nuo mitkä on listattu backlogissa. 
-         * 
-         * Tekee erilliset metodit, jotka palauttaa kans stringiä, jotka katenoidaan
-         * tohon erroriin. Ne erilliset Virheet sit muotoon 
-         * "Vuosiluvun täytyy olla nelinumeroinen kokonaisluku. "
-         * eli väli perään, niin seuraava katenoiduu kivasti perään kiinni.
-         * 
-         * Controllerissa ja add.jsp:ssä toimii kaikki jo täysin.
-         */
-        
+        FieldValidator validator = new FieldValidator();
         String error = "";
         if (values.get("author") == null || values.get("author").equals("")) {
             error += "Author kenttä ei saa olla tyhjä. \n";
@@ -194,46 +141,40 @@ public class ReferenceService {
          if (values.get("title") == null || values.get("title").equals("")) {
             error += "Title kenttä ei saa olla tyhjä. \n";
         }
-        if (values.get("author") != null && !authorGivenCorrectly(values.get("author"))) {
+        if (values.get("author") != null && !validator.authorGivenCorrectly(values.get("author"))) {
             error += "Author kenttä on oltava muodossa Sukunimi, Etunimi ; Sukunimi2, Etunimi. Erottele nimet pilkuilla ja kirjailijat puolipisteellä. \n";
         }
-        if (values.get("volume") != null && !onlyNumbers(values.get("volume"))) {
+        if (values.get("volume") != null && !validator.onlyNumbers(values.get("volume"))) {
             error += "Volume kentän täytyy sisältää pelkkiä numeroita.\n ";
         }
-        if (values.get("number") != null && !onlyNumbers(values.get("number"))) {
+        if (values.get("number") != null && !validator.onlyNumbers(values.get("number"))) {
             error += "Number kentän täytyy sisältää pelkkiä numeroita.\n ";
         }
-        if (values.get("year") != null && !fourNumbers(values.get("year"))) {
+        if (values.get("year") != null && !validator.fourNumbers(values.get("year"))) {
             error += "Year täytyy sisältää 4 numeroa.\n ";
         }
-        if (values.get("pages") != null && !twoNumbersSeparatedWIthTwoLines(values.get("pages"))) {
+        if (values.get("pages") != null && !validator.twoNumbersSeparatedWIthTwoLines(values.get("pages"))) {
             error += "Sivunumerot tulee erotella kahdella viivalla. \n";
         }
         return error;
     }
+
     public void deleteArticle(String id) {
         rr.deleteArticle(id);
     }
-    
-    public boolean onlyNumbers(String text) {
-        String regex = "[0-9]*"; 
-        return (text.matches(regex));
-    }
-    
-    public boolean fourNumbers(String text) {
-        String regex = "[0-9][0-9][0-9][0-9]||"; 
-        return (text.matches(regex));
-    }
-    
-    public boolean twoNumbersSeparatedWIthTwoLines(String text) {
-        String regex = "||[0-9]+--[0-9]+"; 
-        return (text.matches(regex));
-    }
-    
-    public boolean authorGivenCorrectly(String text) {
-        //String regex = "[a-zA-Z]\\s*,\\s*[a-zA-Z]\\s*(;\\s*[a-zA-Z]\\s*,\\s*[a-zA-Z]\\s*)*";
-        String regex = "[a-zA-ZåäöÅÄÖ]+[ ]*,[ ]*[a-zA-ZåäöÅÄÖ]+[ ]*(;[ ]*[a-zA-ZåäöÅÄÖ]+[ ]*,[ ]*[a-zA-ZåäöÅÄÖ]+[ ]*)*";
-        return (text.matches(regex));
+
+    public String editArticle(Map<String, String[]> map) {
+        String error = "";
+        Map<String,String> values = modifyMap(map);
+        error = validate(values);
+        if (error.equals("")) {
+            values.put("textid", generateTextId(values.get("author"), values.get("year")));
+            values.put("author", values.get("author").replace(";", " and "));
+            values.put("author", values.get("author").replace("  ", " "));
+            Reference r = new Reference(values);
+            rr.editArticle(r);
+        }
+        return error;
     }
     
 }

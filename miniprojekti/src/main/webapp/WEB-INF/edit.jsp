@@ -29,7 +29,7 @@
                     <p>Pages:<input type="text" name="pages" value="${reference.pages}"/> Syötä sivunumerot kahdella viivalla erotettuna, esim "10--200".</p> 
                     <p>Publisher:<input type="text" name="publisher" value="${reference.publisher}"/></p>
                     <p>Address:<input type="text" name="address" value="${reference.address}"/></p>
-                    <input type="hidden" name="type" value="${referencetype}"/>
+                    <input type="hidden" name="type" value="${reference.type}"/>
                     <input name="send" type="submit" value="Send" />
 
                 </form>
@@ -37,7 +37,7 @@
             <c:when test="${type == 'InProceedings'}">
                 <h2>Muokkaa inproceedings viitettä</h2>
                 <form method="POST" action="edit">
-                    <p>Author:<input type="text" name="author"value="${reference.author}"/></p>
+                    <p>Author:<input type="text" name="author"value="${reference.author}"/>Syötä ensin sukunimi, erota se etunimestä pilkulla, erota useampi kirjailija puolipisteellä, esim "Sukunimi, Matti; Sukunimi, Teppo."
                     <p>Title:<input type="text" name="title" value="${reference.title}"/></p>
                     <p>Series:<input type="text" name="series" value="${reference.series}"/></p>
                     <p>Volume:<input type="text" name="volume" value="${reference.volume}"/></p>
@@ -47,7 +47,7 @@
                     <p>Publisher:<input type="text" name="publisher" value="${reference.publisher}"/></p>
                     <p>Address:<input type="text" name="address" value="${reference.address}"/></p>
                     <p>Note:<input type="text" name="note" value="${reference.note}"/></p>
-                    <input type="hidden" name="type" value="${type}"/>
+                    <input type="hidden" name="type" value="${reference.type}"/>
                     <input name="send" type="submit" value="Send" />
 
                 </form>
@@ -55,17 +55,17 @@
             <c:when test="${reference.type == 'Book'}">
                 <h2>Muokkaa kirja viitettä</h2>
                 <form method="POST" action="edit">
-                    <p>Author:<input type="text" name="author"/></p>
-                    <p>Title:<input type="text" name="title"/></p>
+                    <p>Author:<input type="text" name="author" value="${reference.author}"/>Syötä ensin sukunimi, erota se etunimestä pilkulla, erota useampi kirjailija puolipisteellä, esim "Sukunimi, Matti; Sukunimi, Teppo."
+                    <p>Title:<input type="text" name="title" value="${reference.title}/></p>
                     <p>Book title:<input type="text" name="booktitle"/></p>
-                    <p>Year:<input type="text" name="year"/></p>
-                    <p>Month:<input type="text" name="month"/></p>
-                    <p>Editor:<input type="text" name="editor"/></p>
-                    <p>Pages:<input type="text" name="pages"/></p>
-                    <p>Organisation:<input type="text" name="organisation"/></p>
-                    <p>Publisher:<input type="text" name="publisher"/></p>
-                    <p>Address:<input type="text" name="address"/></p>
-                    <p>Note:<input type="text" name="note"/></p>
+                 <p>Year:<input type="text" name="year" value="${reference.year}"/></p>
+                    <p>Month:<input type="text" name="month" value="${reference.month}"/></p>
+                    <p>Editor:<input type="text" name="editor" value="${reference.editor}/></p>
+                    <p>Pages:<input type="text" name="pages value="${reference.pages}"/> Syötä sivunumerot kahdella viivalla erotettuna, esim "10--200".</p> 
+                    <p>Organisation:<input type="text" name="organisationvalue="${reference.organisation}"/></p>
+                    <p>Publisher:<input type="text" name="publisher value="${reference.publisher}"/></p>
+                    <p>Address:<input type="text" name="addressvalue="${reference.address}"/></p>
+                    <p>Note:<input type="text" name="note value="${reference.note}"/></p>
                     <input type="hidden" name="type" value="${reference.type}"/>
                     <input name="send" type="submit" value="Send" />
 

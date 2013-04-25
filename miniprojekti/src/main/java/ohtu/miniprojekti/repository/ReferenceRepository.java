@@ -28,8 +28,8 @@ import org.springframework.stereotype.Component;
 public class ReferenceRepository {
     private EbeanServer server;
 
-    public void editArticle(Reference r) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Reference findUnique(String id) {
+        return server.find(Reference.class).where().like("id", id).findUnique();
     }
 
     
@@ -103,6 +103,10 @@ public class ReferenceRepository {
     public void addArticle(Reference reference) {
         reference = checkThatTextidUnique(reference);
         server.save(reference);
+    }
+    
+    public void editArticle(Reference r) {
+        this.server.save(r);
     }
     
     /**

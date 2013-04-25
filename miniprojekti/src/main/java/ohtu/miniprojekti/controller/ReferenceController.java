@@ -71,32 +71,43 @@ public class ReferenceController {
         request.setAttribute("list", list);
         if (!error.equals("")) {
             request.setAttribute("error", error);
+            request.setAttribute("type", map.get("type")[0]);
             return "add";
         }
 
         return "list-norm";
     }
 
-    @RequestMapping(value = "deletereference", method = RequestMethod.GET)
+    @RequestMapping(value = "delete", method = RequestMethod.GET)
     public String deleteReference(HttpServletRequest request, HttpServletResponse response) {
-        rs.deleteArticle(request.getParameter("delete"));
+        rs.deleteArticle(request.getParameter("id"));
         List<Reference> list = rs.getList();
         request.setAttribute("list", list);
 
         return "list-norm";
     }
 
+    @RequestMapping(value = "edit", method = RequestMethod.GET)
+    public String getEdit(HttpServletRequest request, HttpServletResponse response) {
+        String id = request.getParameter("id");
+        Reference ref = rs.findUnique(id);
+        request.setAttribute("reference", ref);
+        return "edit";
+    }
+    
     @RequestMapping(value = "edit", method = RequestMethod.POST)
     public String postEdit(HttpServletRequest request, HttpServletResponse response) {
         Map<String,String[]> map = request.getParameterMap();
         String error = rs.editArticle(map);
-        List<Reference> list = rs.getList();
-        request.setAttribute("list", list);
         if(!error.equals("")) {
             request.setAttribute("error", error);
+            request.setAttribute("reference", map);
+            request.setAttribute("type", map.get("type")[0]);
             return "edit";
         }
-        
+        List<Reference> list = rs.getList();
+        request.setAttribute("list", list);
+            
         return "list-norm";
     }
     

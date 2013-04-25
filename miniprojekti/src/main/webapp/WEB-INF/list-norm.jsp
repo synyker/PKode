@@ -84,10 +84,16 @@
             </c:if>
                 
             
-                <form action="deletereference" method="GET">
-                    <input name="delete" type="submit" value="${reference.id}"/>
+                <form action="delete" method="GET">
+                    <input type="hidden" name="id" value="${reference.id}"/>
+                    <input name="delete" type="submit" value="Delete"/>
                 </form>
-            <p>---------</p>
+                <form action="edit" method="GET">
+                    <input type="hidden" name="id" value="${reference.id}"/>
+                    <input name="edit" type="submit" value="Edit"/>
+                </form>
+                <br>
+                <br>
         </c:forEach>
 
     </body>

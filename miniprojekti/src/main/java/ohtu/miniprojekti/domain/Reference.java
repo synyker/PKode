@@ -216,4 +216,26 @@ public class Reference {
     public void setOrganisation(String organisation) {
         this.organisation = organisation;
     }
+
+    public void updateValues(Map<String, String> map) {
+        this.type = map.get("type");
+        this.author = map.get("author");
+        this.title = map.get("title");
+        this.booktitle = map.get("booktitle");
+        this.journal = map.get("journal");
+        this.volume = map.get("volume");
+        this.number = map.get("number");
+        this.year = map.get("year");
+        this.pages = map.get("pages");
+        this.publisher = map.get("publisher");
+        this.address = map.get("address");
+        this.series = map.get("series");
+        this.edition = map.get("edition");
+        this.month = map.get("month");
+        this.note = map.get("note");
+        this.editor = map.get("editor");
+        this.organisation = map.get("organisation");
+        this.textid = map.get("textid");
+        this.id = Integer.parseInt(map.get("id"));
+    }
 }

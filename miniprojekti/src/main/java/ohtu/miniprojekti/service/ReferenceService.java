@@ -36,8 +36,25 @@ public class ReferenceService {
             values.put("textid", generateTextId(values.get("author"), values.get("year")));
             values.put("author", values.get("author").replace(";", " and "));
             values.put("author", values.get("author").replace("  ", " "));
+            
             Reference r = new Reference(values);
             rr.addArticle(r);
+        }
+        return error;
+    }
+    
+    public String editArticle(Map<String, String[]> map) {
+        String error = "";
+        Map<String,String> values = modifyMap(map);
+        error = validate(values);
+        
+        if (error.equals("")) {
+            values.put("textid", generateTextId(values.get("author"), values.get("year")));
+            values.put("author", values.get("author").replace(";", " and "));
+            values.put("author", values.get("author").replace("[ ]+", " "));
+            Reference r = rr.findUnique(values.get("id"));
+            r.updateValues(values);
+            rr.editArticle(r);
         }
         return error;
     }
@@ -163,18 +180,9 @@ public class ReferenceService {
         rr.deleteArticle(id);
     }
 
-    public String editArticle(Map<String, String[]> map) {
-        String error = "";
-        Map<String,String> values = modifyMap(map);
-        error = validate(values);
-        if (error.equals("")) {
-            values.put("textid", generateTextId(values.get("author"), values.get("year")));
-            values.put("author", values.get("author").replace(";", " and "));
-            values.put("author", values.get("author").replace("  ", " "));
-            Reference r = new Reference(values);
-            rr.editArticle(r);
-        }
-        return error;
-    }
     
+
+    public Reference findUnique(String id) {
+        return rr.findUnique(id);
+    }
 }

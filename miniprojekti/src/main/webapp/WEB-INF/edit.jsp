@@ -16,8 +16,13 @@
     <body>
         <h1>Viitehallintajärjestelmä</h1>
         <a href="front"><< Takaisin etusivulle <<</a>
+        
+        <c:if test="${not empty error}">
+                <p>Virhe: ${error}</p>
+        </c:if>
+                
         <c:choose>
-            <c:when test="${reference.type == 'Article'}">
+            <c:when test="${type == 'Article'}">
                 <h2>Muokkaa artikkelin viitettä</h2>
                 <form method="POST" action="edit">
                     <p>Author:<input type="text" name="author" value="${reference.author}"/> Syötä ensin sukunimi, erota se etunimestä pilkulla, erota useampi kirjailija puolipisteellä, esim "Sukunimi, Matti; Sukunimi, Teppo."</p>
@@ -54,20 +59,20 @@
 
                 </form>
             </c:when>
-            <c:when test="${reference.type == 'Book'}">
+            <c:when test="${type == 'Book'}">
                 <h2>Muokkaa kirja viitettä</h2>
                 <form method="POST" action="edit">
                     <p>Author:<input type="text" name="author" value="${reference.author}"/>Syötä ensin sukunimi, erota se etunimestä pilkulla, erota useampi kirjailija puolipisteellä, esim "Sukunimi, Matti; Sukunimi, Teppo."
-                    <p>Title:<input type="text" name="title" value="${reference.title}/></p>
+                    <p>Title:<input type="text" name="title" value="${reference.title}"/></p>
                     <p>Book title:<input type="text" name="booktitle"/></p>
                  <p>Year:<input type="text" name="year" value="${reference.year}"/></p>
                     <p>Month:<input type="text" name="month" value="${reference.month}"/></p>
-                    <p>Editor:<input type="text" name="editor" value="${reference.editor}/></p>
-                    <p>Pages:<input type="text" name="pages value="${reference.pages}"/> Syötä sivunumerot kahdella viivalla erotettuna, esim "10--200".</p> 
-                    <p>Organisation:<input type="text" name="organisationvalue="${reference.organisation}"/></p>
-                    <p>Publisher:<input type="text" name="publisher value="${reference.publisher}"/></p>
-                    <p>Address:<input type="text" name="addressvalue="${reference.address}"/></p>
-                    <p>Note:<input type="text" name="note value="${reference.note}"/></p>
+                    <p>Editor:<input type="text" name="editor" value="${reference.editor}"/></p>
+                    <p>Pages:<input type="text" name="pages" value="${reference.pages}"/> Syötä sivunumerot kahdella viivalla erotettuna, esim "10--200".</p> 
+                    <p>Organisation:<input type="text" name="organisation" value="${reference.organisation}"/></p>
+                    <p>Publisher:<input type="text" name="publisher" value="${reference.publisher}"/></p>
+                    <p>Address:<input type="text" name="address" value="${reference.address}"/></p>
+                    <p>Note:<input type="text" name="note" value="${reference.note}"/></p>
                     <input type="hidden" name="type" value="${reference.type}"/>
                     <input type="hidden" name="id" value="${reference.id}"/>
                     <input name="send" type="submit" value="Send" />

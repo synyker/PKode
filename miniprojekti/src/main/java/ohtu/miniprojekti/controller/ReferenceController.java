@@ -65,22 +65,25 @@ public class ReferenceController {
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String postAdd(HttpServletRequest request, HttpServletResponse response) {
-        Map<String,String[]> map = request.getParameterMap();
+        Map<String, String[]> map = request.getParameterMap();
         String error = rs.addArticle(map);
         List<Reference> list = rs.getList();
         request.setAttribute("list", list);
-        if(!error.equals("")) {
+        if (!error.equals("")) {
             request.setAttribute("error", error);
             return "add";
         }
-        
+
         return "list-norm";
     }
-    
+
     @RequestMapping(value = "deletereference", method = RequestMethod.GET)
     public String deleteReference(HttpServletRequest request, HttpServletResponse response) {
-       rs.deleteArticle(request.getParameter("delete"));
-       return "list-norm";
+        rs.deleteArticle(request.getParameter("delete"));
+        List<Reference> list = rs.getList();
+        request.setAttribute("list", list);
+
+        return "list-norm";
     }
 
     @RequestMapping(value = "search", method = RequestMethod.GET)
@@ -97,7 +100,6 @@ public class ReferenceController {
         return "list-bib";
     }
 
-
     @RequestMapping(value = "list-norm", method = RequestMethod.GET)
     public String getNorm(HttpServletRequest request, HttpServletResponse response) {
         List<Reference> list = rs.getList();
@@ -111,18 +113,19 @@ public class ReferenceController {
         String bibtex = rs.generateBibtexString();
         response.setContentLength((int) bibtex.length());
         String filename = "";
-        if(request.getParameter("filename").equals(""))
+        if (request.getParameter("filename").equals("")) {
             filename = "file.bib";
-        else
-            filename = request.getParameter("filename")+".bib";
-        
-        if(!request.getParameter("filename").equals("integration-test")) {
-            response.setHeader("Content-Disposition", "attachment; filename=\""+filename+"\"");
+        } else {
+            filename = request.getParameter("filename") + ".bib";
+        }
+
+        if (!request.getParameter("filename").equals("integration-test")) {
+            response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
             response.setContentType("application/octet-stream");
         }
         OutputStream os = response.getOutputStream();
         int written = 0;
-        while(written < bibtex.length()) {
+        while (written < bibtex.length()) {
             os.write(bibtex.charAt(written));
             written++;
         }

@@ -221,6 +221,12 @@ public class ReferenceServiceTest {
         map.put("number", arr);
         assertEquals("Number kentän täytyy sisältää pelkkiä numeroita.\n Sivunumerot tulee erotella kahdella viivalla. \n", rs.addArticle(map));
     }
+     @Test
+     public void deletionServiceWorksCorrectly() {
+         rs.addArticle(map);
+         rs.deleteArticle("1");
+         assertEquals(0, rs.getList().size());
+     }
 
 
 }

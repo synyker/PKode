@@ -17,13 +17,13 @@ scenario "when user adds a book it is saved to the database", {
 }
     when 'information for the book to be added is entered', {
         element = driver.findElement(By.name("author"));
-        element.sendKeys("TestiKirjoittaja");
+        element.sendKeys("TestiKirjoittaja, Heikki");
         element = driver.findElement(By.name("title"));
         element.sendKeys("Testinimi");
         element = driver.findElement(By.name("booktitle"));
         element.sendKeys("Testikirjatitle");
         element = driver.findElement(By.name("year"));
-        element.sendKeys("testivuosi");
+        element.sendKeys("1999");
         element = driver.findElement(By.name("send"));
         element.submit();
 }
@@ -32,7 +32,7 @@ scenario "when user adds a book it is saved to the database", {
     }
 
     and 'book just added is shown in the list', {
-        driver.getPageSource().contains("TestiKirjoittaja").shouldBe true
+        driver.getPageSource().contains("TestiKirjoittaja, Heikki").shouldBe true
     }
 }
 
@@ -47,7 +47,7 @@ scenario "when user adds inproceedings they are saved to the database", {
 }
     when 'information for the inproceedings to be added is entered', {
         element = driver.findElement(By.name("author"));
-        element.sendKeys("TestiKirjoittaja");
+        element.sendKeys("TestiKirjoittaja, Ville");
         element = driver.findElement(By.name("title"));
         element.sendKeys("Testinimi");
         element = driver.findElement(By.name("series"));
@@ -62,6 +62,6 @@ scenario "when user adds inproceedings they are saved to the database", {
     }
 
     and 'inproceedings just added is shown in the list', {
-        driver.getPageSource().contains("TestiKirjoittaja").shouldBe true
+        driver.getPageSource().contains("TestiKirjoittaja, Ville").shouldBe true
     }
 }

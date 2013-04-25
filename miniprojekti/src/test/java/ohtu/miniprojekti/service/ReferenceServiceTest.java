@@ -44,7 +44,7 @@ public class ReferenceServiceTest {
         map = new HashMap<String, String[]>();
 
         arr = new String[1];
-        arr[0] = "Tekijä";
+        arr[0] = "Tekijä, Tauno";
         map.put("author", arr);
         arr = new String[1];
         arr[0] = "2009";
@@ -52,31 +52,13 @@ public class ReferenceServiceTest {
         arr = new String[1];
         arr[0] = "Article";
         map.put("type", arr);
+        arr = new String[1];
+        arr[0] = "Otsikko";
+        map.put("title", arr);
     }
 
     @After
     public void tearDown() {
-    }
-
-    @Test
-    public void ListBibTexReturnsNoScandicLettersWhenOneAdded() {
-        rs.addArticle(map);
-        assertEquals("Tekij\\\"{a}yr\\\"", rs.getBibTexList().get(0).getAuthor());
-    }
-
-    @Test
-    public void editingRemovesScandicLetters() {
-        assertEquals("\\\"{a}yr\\\"", rs.editScandinavianLetters("ä"));
-    }
-
-    @Test
-    public void removingScandicLettersReturnsNullIfParameterIsNull() {
-        assertEquals(null, rs.editScandinavianLetters(null));
-    }
-
-    @Test
-    public void removingScandicLettersReturnsEmptyStringIfParameterIsEmptyString() {
-        assertEquals("", rs.editScandinavianLetters(""));
     }
 
     @Test
@@ -115,24 +97,6 @@ public class ReferenceServiceTest {
     }
 
     @Test
-    public void textIdGeneratedCorrectlyWhenYearTooLong() {
-        arr = new String[1];
-        arr[0] = "2000000000000013";
-        map.put("year", arr);
-        rs.addArticle(map);
-        assertEquals("T13", rs.getList().get(0).getTextid());
-    }
-
-    @Test
-    public void textidWorksIfNoAuthorGiven() {
-        arr = new String[1];
-        arr[0] = "";
-        map.put("author", arr);
-        rs.addArticle(map);
-        assertEquals("09", rs.getList().get(0).getTextid());
-    }
-
-    @Test
     public void textidWorksIfNoYearGiven() {
         arr = new String[1];
         arr[0] = "";
@@ -165,7 +129,7 @@ public class ReferenceServiceTest {
     @Test
     public void bibtexStringCorrectWhenOneReferenceAdded() {
         rs.addArticle(map);
-        assertEquals("@Article{T09,\n    author = {Tekij\\\"{a}yr\\\"},\n    year = {2009},\n}\n", rs.generateBibtexString());
+        assertEquals("@Article{T09,\n    author = {Tekij\\\"{a}yr\\\", Tauno},\n    title = {Otsikko},\n    year = {2009},\n}\n", rs.generateBibtexString());
     }
 
     @Test
@@ -174,6 +138,192 @@ public class ReferenceServiceTest {
         arr[0] = "";
         map.put("journal", arr);
         rs.addArticle(map);
-        assertEquals("@Article{T09,\n    author = {Tekij\\\"{a}yr\\\"},\n    year = {2009},\n}\n", rs.generateBibtexString());
+        assertEquals("@Article{T09,\n    author = {Tekij\\\"{a}yr\\\", Tauno},\n    title = {Otsikko},\n    year = {2009},\n}\n", rs.generateBibtexString());
+    }
+
+    @Test
+    public void referenceNotAddedWhenNoAuthor() {
+        arr = new String[1];
+        arr[0] = "";
+        map.put("author", arr);
+        rs.addArticle(map);
+        assertEquals(0, rs.getList().size());
+    }
+
+    @Test
+    public void referenceNotAddedWhenAuthorNotInRightFormat() {
+        arr = new String[1];
+        arr[0] = "Kalle";
+        map.put("author", arr);
+        rs.addArticle(map);
+        assertEquals(0, rs.getList().size());
+    }
+
+    @Test
+    public void referenceNotAddedWhenNoTitle() {
+        arr = new String[1];
+        arr[0] = "";
+        map.put("title", arr);
+        rs.addArticle(map);
+        assertEquals(0, rs.getList().size());
+    }
+
+    @Test
+    public void referenceNotAddedWhenVolumeNotInRightFormat() {
+        arr = new String[1];
+        arr[0] = "k";
+        map.put("volume", arr);
+        rs.addArticle(map);
+        assertEquals(0, rs.getList().size());
+    }
+
+    @Test
+    public void referenceNotAddedWhenNumberNotInRightFormat() {
+        arr = new String[1];
+        arr[0] = "k";
+        map.put("number", arr);
+        rs.addArticle(map);
+        assertEquals(0, rs.getList().size());
+    }
+
+    @Test
+    public void referenceNotAddedWhenYearNotInRightFormat() {
+        arr = new String[1];
+        arr[0] = "12";
+        map.put("year", arr);
+        rs.addArticle(map);
+        assertEquals(0, rs.getList().size());
+    }
+
+    @Test
+    public void referenceNotAddedWhenPagesNotInRightFormat() {
+        arr = new String[1];
+        arr[0] = "1-2";
+        map.put("pages", arr);
+        rs.addArticle(map);
+        assertEquals(0, rs.getList().size());
+    }
+    
+     @Test
+    public void correctErrorWhenPagesNotInRightFormat() {
+        arr = new String[1];
+        arr[0] = "1-2";
+        map.put("pages", arr);
+        assertEquals("Sivunumerot tulee erotella kahdella viivalla. \n", rs.addArticle(map));
+    }
+     @Test
+    public void correctErrorWhenTwoFieldsNotInRightFormat() {
+        arr = new String[1];
+        arr[0] = "1-2";
+        map.put("pages", arr);
+        arr = new String[1];
+        arr[0] = "k";
+        map.put("number", arr);
+        assertEquals("Number kentän täytyy sisältää pelkkiä numeroita.\n Sivunumerot tulee erotella kahdella viivalla. \n", rs.addArticle(map));
+    }
+
+    @Test
+    public void editingRemovesScandicLetters() {
+        assertEquals("\\\"{a}yr\\\"", rs.editScandinavianLetters("ä"));
+    }
+
+    @Test
+    public void removingScandicLettersReturnsNullIfParameterIsNull() {
+        assertEquals(null, rs.editScandinavianLetters(null));
+    }
+
+    @Test
+    public void removingScandicLettersReturnsEmptyStringIfParameterIsEmptyString() {
+        assertEquals("", rs.editScandinavianLetters(""));
+    }
+
+    @Test
+    public void onlyNumbersReturnsTrueWhenEmpty() {
+        assertTrue(rs.onlyNumbers(""));
+    }
+
+    @Test
+    public void onlyNumbersReturnsTrueWhenOnlyNumbers() {
+        assertTrue(rs.onlyNumbers("12"));
+    }
+
+    @Test
+    public void onlyNumbersReturnsFalseWhenOtherThanNumbers() {
+        assertTrue(!rs.onlyNumbers("12e"));
+    }
+
+    @Test
+    public void fourNumbersReturnsTrueWhenEmpty() {
+        assertTrue(rs.fourNumbers(""));
+    }
+
+    @Test
+    public void fourNumbersReturnsTrueWhenOnlyNumbers() {
+        assertTrue(rs.fourNumbers("1245"));
+    }
+
+    @Test
+    public void fourNumbersReturnsFalseWhenOtherThanNumbers() {
+        assertTrue(!rs.fourNumbers("12e"));
+    }
+
+    @Test
+    public void fourNumbersReturnsFalseWhenOnlyNumbersButNotFour() {
+        assertTrue(!rs.fourNumbers("12876"));
+    }
+
+    @Test
+    public void twoNumbersSeparatedWIthTwoLinesReturnsTrueWhenEmpty() {
+        assertTrue(rs.twoNumbersSeparatedWIthTwoLines(""));
+    }
+
+    @Test
+    public void twoNumbersSeparatedWIthTwoLinesReturnsTrueWhenCorrect() {
+        assertTrue(rs.twoNumbersSeparatedWIthTwoLines("12--45"));
+    }
+
+    @Test
+    public void twoNumbersSeparatedWIthTwoLinesReturnsFalseWhenOnlyOneLine() {
+        assertTrue(!rs.twoNumbersSeparatedWIthTwoLines("12-2"));
+    }
+
+    @Test
+    public void twoNumbersSeparatedWIthTwoLinesReturnsFalseWhenOnlyOneNumberAndLines() {
+        assertTrue(!rs.twoNumbersSeparatedWIthTwoLines("1--"));
+    }
+
+    @Test
+    public void authorGivenCorrectlyReturnsTrueWhenOneAuthor() {
+        assertTrue(rs.authorGivenCorrectly("Tekijä, Teemu"));
+    }
+
+    @Test
+    public void authorGivenCorrectlyReturnsTrueWhenTwoAuthors() {
+        assertTrue(rs.authorGivenCorrectly("Tekijä, Teemu ; Laulaja, lalli"));
+    }
+
+    @Test
+    public void authorGivenCorrectlyReturnsTrueWhenThreeAuthorsr() {
+        assertTrue(rs.authorGivenCorrectly("Tekijä, Teemu ; Ääliö, Olli ; poro, kalle"));
+    }
+
+    @Test
+    public void authorGivenCorrectlyReturnsTrueWhenWhiteSpaces() {
+        assertTrue(rs.authorGivenCorrectly("Tekijä   , Teemu    ; Ääliö,    Olli; poro   ,kalle  "));
+    }
+
+    @Test
+    public void authorGivenCorrectlyReturnsFalseWhenAUthorsNotSeparatedCorrectly() {
+        assertTrue(!rs.authorGivenCorrectly("Tekijä, Teemu ; Ääliö, Olli : poro, kalle"));
+    }
+
+    @Test
+    public void authorGivenCorrectlyReturnsFalseWhenNamesNotSeparatedCorrectly() {
+        assertTrue(!rs.authorGivenCorrectly("Tekijä Teemu ; Ääliö Olli ; poro kalle"));
+    }
+
+    @Test
+    public void authorGivenCorrectlyReturnsFalseWhenOnlyOneNameForAUthor() {
+        assertTrue(!rs.authorGivenCorrectly("Tekijä ; Ääliö"));
     }
 }

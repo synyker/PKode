@@ -82,7 +82,7 @@ public class ReferenceController {
        rs.deleteArticle(request.getParameter("delete"));
        return "list-norm";
     }
-    
+
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public String searchAuthor(HttpServletRequest request, HttpServletResponse response) {
         List<Reference> list = rs.findList(request.getParameter("author"));

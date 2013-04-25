@@ -16,13 +16,13 @@ scenario "when user adds an article it is saved to the database", {
     }
     when 'information for the article to be added is entered', {
         element = driver.findElement(By.name("author"));
-        element.sendKeys("TestiKirjoittaja");
+        element.sendKeys("TestiKirjoittaja, Kalle");
         element = driver.findElement(By.name("title"));
         element.sendKeys("Testinimi");
         element = driver.findElement(By.name("journal"));
         element.sendKeys("Testinimi");
         element = driver.findElement(By.name("year"));
-        element.sendKeys("Testilehti");
+        element.sendKeys("1987");
         element = driver.findElement(By.name("send"));
         element.submit();
     }
@@ -31,7 +31,7 @@ scenario "when user adds an article it is saved to the database", {
     }
 
     and 'article just added is shown in the list', {
-        driver.getPageSource().contains("TestiKirjoittaja").shouldBe true
+        driver.getPageSource().contains("TestiKirjoittaja, Kalle").shouldBe true
     }
 
 }

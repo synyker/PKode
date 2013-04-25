@@ -1,1 +1,4 @@
+*.db
+.gitignore
+*DS_STORE
 /miniprojekti/target/

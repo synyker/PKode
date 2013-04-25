@@ -86,6 +86,20 @@ public class ReferenceController {
         return "list-norm";
     }
 
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String postEdit(HttpServletRequest request, HttpServletResponse response) {
+        Map<String,String[]> map = request.getParameterMap();
+        String error = rs.editArticle(map);
+        List<Reference> list = rs.getList();
+        request.setAttribute("list", list);
+        if(!error.equals("")) {
+            request.setAttribute("error", error);
+            return "edit";
+        }
+        
+        return "list-norm";
+    }
+    
     @RequestMapping(value = "search", method = RequestMethod.GET)
     public String searchAuthor(HttpServletRequest request, HttpServletResponse response) {
         List<Reference> list = rs.findList(request.getParameter("author"));

@@ -117,4 +117,12 @@ public class ReferenceRepositoryTest {
          rr.addArticle(reference);
          assertEquals(0, rr.findList("eilöydy").size());
      }
+      @Test
+      public void deleteAddedArticle() {
+          rr.addArticle(reference);
+          int i = reference.getId();
+          String id = Integer.toString(i);
+          rr.deleteArticle(id);
+          assertEquals(0, rr.findList("eilöydy").size());
+      }
 }

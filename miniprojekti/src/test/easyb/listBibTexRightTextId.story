@@ -16,6 +16,8 @@ scenario "Reference has correct textId when only one with same id added to datab
         element.click();
         element = driver.findElement(By.name("author"));
         element.sendKeys("Aapeli, Kalle; Baabeli, Nalle");
+		element = driver.findElement(By.name("title"));
+        element.sendKeys("otsikkopotsikko");
         element = driver.findElement(By.name("year"));
         element.sendKeys("2009");
         element = driver.findElement(By.name("send"));
@@ -41,6 +43,8 @@ scenario "Reference has correct textid when another with same original id is add
         element.click();
         element = driver.findElement(By.name("author"));
         element.sendKeys("Aapeli, Kalle; Baabeli, Pekka");
+		element = driver.findElement(By.name("title"));
+        element.sendKeys("otsikkopotsikko");
         element = driver.findElement(By.name("year"));
         element.sendKeys("2009");
         element = driver.findElement(By.name("send"));

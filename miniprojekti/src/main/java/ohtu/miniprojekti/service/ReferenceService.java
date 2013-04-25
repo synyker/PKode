@@ -29,13 +29,14 @@ public class ReferenceService {
     public String addArticle(Map<String,String[]> map) {
         String error = "";
         Map<String,String> values = modifyMap(map);
-        //error = validate(values);
-        values.put("textid", generateTextId(values.get("author"), values.get("year")));
-        values.put("author", values.get("author").replace(";", " and "));
-        values.put("author", values.get("author").replace("  ", " "));
-        Reference r = new Reference(values);
-        rr.addArticle(r);
-        
+        error = validate(values);
+        if (error.equals("")) {
+            values.put("textid", generateTextId(values.get("author"), values.get("year")));
+            values.put("author", values.get("author").replace(";", " and "));
+            values.put("author", values.get("author").replace("  ", " "));
+            Reference r = new Reference(values);
+            rr.addArticle(r);
+        }
         return error;
     }
     
@@ -56,25 +57,25 @@ public class ReferenceService {
         return rr.findList(author);
     }
     
-    /**
-     * Returns a list of references in BibTex Format.
-     * 
-     * Scandic letters are replaced with appropriate characters.
-     * @return  list of all references in the database in BibTex Format
-     */
-    public List<Reference> getBibTexList() {
-        List<Reference> references = rr.getList();
-        for (Reference reference : references) {
-            reference.setAuthor(editScandinavianLetters(reference.getAuthor()));
-            reference.setTitle(editScandinavianLetters(reference.getTitle()));
-            reference.setJournal(editScandinavianLetters(reference.getJournal()));
-            reference.setAddress(editScandinavianLetters(reference.getAddress()));
-            reference.setPublisher(editScandinavianLetters(reference.getPublisher()));
-            reference.setBooktitle(editScandinavianLetters(reference.getBooktitle()));
-            reference.setTextid(editScandinavianLetters(reference.getTextid()));
-        }
-        return references;
-    }
+//    /**
+//     * Returns a list of references in BibTex Format.
+//     * 
+//     * Scandic letters are replaced with appropriate characters.
+//     * @return  list of all references in the database in BibTex Format
+//     */
+//    public List<Reference> getBibTexList() {
+//        List<Reference> references = rr.getList();
+//        for (Reference reference : references) {
+//            reference.setAuthor(editScandinavianLetters(reference.getAuthor()));
+//            reference.setTitle(editScandinavianLetters(reference.getTitle()));
+//            reference.setJournal(editScandinavianLetters(reference.getJournal()));
+//            reference.setAddress(editScandinavianLetters(reference.getAddress()));
+//            reference.setPublisher(editScandinavianLetters(reference.getPublisher()));
+//            reference.setBooktitle(editScandinavianLetters(reference.getBooktitle()));
+//            reference.setTextid(editScandinavianLetters(reference.getTextid()));
+//        }
+//        return references;
+//    }
     
     /**
      * Replaces scandivanian letters with characters needed for BibTex Format
@@ -143,28 +144,28 @@ public class ReferenceService {
         String returnable = "";
         for (Reference reference : bibtexlist) {
             returnable += "@" + reference.getType() + "{" + reference.getTextid()+","+"\n";
-            returnable += checkField("author", reference.getAuthor())
-                            + checkField("booktitle", reference.getBooktitle())
-                            + checkField("title", reference.getTitle())
-                            + checkField("journal", reference.getJournal())
-                            + checkField("volume", reference.getVolume())
-                            + checkField("number", reference.getNumber())
-                            + checkField("year", reference.getYear())
-                            + checkField("month", reference.getMonth())
-                            + checkField("pages", reference.getPages())
-                            + checkField("publisher", reference.getPublisher())
-                            + checkField("address", reference.getAddress())
-                            + checkField("series", reference.getSeries())
-                            + checkField("edition", reference.getEdition())
-                            + checkField("note", reference.getNote())
-                            + checkField("editor", reference.getEditor())
-                            + checkField("organisation", reference.getOrganisation());
+            returnable += checkFieldForBibTex("author", reference.getAuthor())
+                            + checkFieldForBibTex("booktitle", reference.getBooktitle())
+                            + checkFieldForBibTex("title", reference.getTitle())
+                            + checkFieldForBibTex("journal", reference.getJournal())
+                            + checkFieldForBibTex("volume", reference.getVolume())
+                            + checkFieldForBibTex("number", reference.getNumber())
+                            + checkFieldForBibTex("year", reference.getYear())
+                            + checkFieldForBibTex("month", reference.getMonth())
+                            + checkFieldForBibTex("pages", reference.getPages())
+                            + checkFieldForBibTex("publisher", reference.getPublisher())
+                            + checkFieldForBibTex("address", reference.getAddress())
+                            + checkFieldForBibTex("series", reference.getSeries())
+                            + checkFieldForBibTex("edition", reference.getEdition())
+                            + checkFieldForBibTex("note", reference.getNote())
+                            + checkFieldForBibTex("editor", reference.getEditor())
+                            + checkFieldForBibTex("organisation", reference.getOrganisation());
             returnable += "}\n";
         }
         return returnable;
     }
     
-    private String checkField(String fieldname, String field) {
+    private String checkFieldForBibTex(String fieldname, String field) {
         if (field != null && !field.equals("")) {
             field = editScandinavianLetters(field);
             return "" + "    " + fieldname + " = {" + field + "},"+"\n";
@@ -174,7 +175,6 @@ public class ReferenceService {
     }
 
     private String validate(Map<String, String> values) {
-        throw new UnsupportedOperationException("Not yet implemented");
         /**
          * Tässä käy läpi nuo kaikki arvot siellä mapissa jotka vaatii validointia
          * eli nuo mitkä on listattu backlogissa. 
@@ -187,8 +187,50 @@ public class ReferenceService {
          * Controllerissa ja add.jsp:ssä toimii kaikki jo täysin.
          */
         
-        //String error = "";
+        String error = "";
+        if (values.get("author") == null || values.get("author").equals("")) {
+            error += "Author kenttä ei saa olla tyhjä. \n";
+        }
+         if (values.get("title") == null || values.get("title").equals("")) {
+            error += "Title kenttä ei saa olla tyhjä. \n";
+        }
+        if (values.get("author") != null && !authorGivenCorrectly(values.get("author"))) {
+            error += "Author kenttä on oltava muodossa Sukunimi, Etunimi ; Sukunimi2, Etunimi. Erottele nimet pilkuilla ja kirjailijat puolipisteellä. \n";
+        }
+        if (values.get("volume") != null && !onlyNumbers(values.get("volume"))) {
+            error += "Volume kentän täytyy sisältää pelkkiä numeroita.\n ";
+        }
+        if (values.get("number") != null && !onlyNumbers(values.get("number"))) {
+            error += "Number kentän täytyy sisältää pelkkiä numeroita.\n ";
+        }
+        if (values.get("year") != null && !fourNumbers(values.get("year"))) {
+            error += "Year täytyy sisältää 4 numeroa.\n ";
+        }
+        if (values.get("pages") != null && !twoNumbersSeparatedWIthTwoLines(values.get("pages"))) {
+            error += "Sivunumerot tulee erotella kahdella viivalla. \n";
+        }
+        return error;
     }
     
+    public boolean onlyNumbers(String text) {
+        String regex = "[0-9]*"; 
+        return (text.matches(regex));
+    }
+    
+    public boolean fourNumbers(String text) {
+        String regex = "[0-9][0-9][0-9][0-9]||"; 
+        return (text.matches(regex));
+    }
+    
+    public boolean twoNumbersSeparatedWIthTwoLines(String text) {
+        String regex = "||[0-9]+--[0-9]+"; 
+        return (text.matches(regex));
+    }
+    
+    public boolean authorGivenCorrectly(String text) {
+        //String regex = "[a-zA-Z]\\s*,\\s*[a-zA-Z]\\s*(;\\s*[a-zA-Z]\\s*,\\s*[a-zA-Z]\\s*)*";
+        String regex = "[a-zA-ZåäöÅÄÖ]+[ ]*,[ ]*[a-zA-ZåäöÅÄÖ]+[ ]*(;[ ]*[a-zA-ZåäöÅÄÖ]+[ ]*,[ ]*[a-zA-ZåäöÅÄÖ]+[ ]*)*";
+        return (text.matches(regex));
+    }
     
 }

@@ -15,7 +15,7 @@ scenario "after adding an article to database it is shown in the list in BibTex 
         element = driver.findElement(By.id("addA"));
         element.click();
         element = driver.findElement(By.name("author"));
-        element.sendKeys("Testaaja, Kalle");
+        element.sendKeys("Testaaja, Olli");
         element = driver.findElement(By.name("title"));
         element.sendKeys("Hieno Juttu");
         element = driver.findElement(By.name("send"));
@@ -30,7 +30,7 @@ scenario "after adding an article to database it is shown in the list in BibTex 
         driver.getPageSource().contains("listaus BibTex").shouldBe true
     }
     and 'the added article is listed', {
-        driver.getPageSource().contains("author = {Testaaja, Kalle}").shouldBe true
+        driver.getPageSource().contains("author = {Testaaja, Olli}").shouldBe true
     }
 }
  

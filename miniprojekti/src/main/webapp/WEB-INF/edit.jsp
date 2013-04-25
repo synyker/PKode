@@ -29,7 +29,8 @@
                     <p>Pages:<input type="text" name="pages" value="${reference.pages}"/> Syötä sivunumerot kahdella viivalla erotettuna, esim "10--200".</p> 
                     <p>Publisher:<input type="text" name="publisher" value="${reference.publisher}"/></p>
                     <p>Address:<input type="text" name="address" value="${reference.address}"/></p>
-                    <input type="hidden" name="type" value="${referencetype}"/>
+                    <input type="hidden" name="type" value="${reference.type}"/>
+                    <input type="hidden" name="id" value="${reference.id}"/>
                     <input name="send" type="submit" value="Send" />
 
                 </form>
@@ -47,7 +48,8 @@
                     <p>Publisher:<input type="text" name="publisher" value="${reference.publisher}"/></p>
                     <p>Address:<input type="text" name="address" value="${reference.address}"/></p>
                     <p>Note:<input type="text" name="note" value="${reference.note}"/></p>
-                    <input type="hidden" name="type" value="${type}"/>
+                    <input type="hidden" name="type" value="${reference.type}"/>
+                    <input type="hidden" name="id" value="${reference.id}"/>
                     <input name="send" type="submit" value="Send" />
 
                 </form>
@@ -67,6 +69,7 @@
                     <p>Address:<input type="text" name="address"/></p>
                     <p>Note:<input type="text" name="note"/></p>
                     <input type="hidden" name="type" value="${reference.type}"/>
+                    <input type="hidden" name="id" value="${reference.id}"/>
                     <input name="send" type="submit" value="Send" />
 
                 </form>

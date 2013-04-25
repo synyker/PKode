@@ -66,9 +66,14 @@ public class ReferenceController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String postAdd(HttpServletRequest request, HttpServletResponse response) {
         Map<String,String[]> map = request.getParameterMap();
-        rs.addArticle(map);
+        String error = rs.addArticle(map);
         List<Reference> list = rs.getList();
         request.setAttribute("list", list);
+        if(!error.equals("")) {
+            request.setAttribute("error", error);
+            return "add";
+        }
+        
         return "list-norm";
     }
     

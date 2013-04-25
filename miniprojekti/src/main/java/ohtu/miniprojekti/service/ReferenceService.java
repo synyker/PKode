@@ -26,13 +26,17 @@ public class ReferenceService {
     
     public ReferenceService() {}
 
-    public void addArticle(Map<String,String[]> map) {
+    public String addArticle(Map<String,String[]> map) {
+        String error = "";
         Map<String,String> values = modifyMap(map);
+        //error = validate(values);
         values.put("textid", generateTextId(values.get("author"), values.get("year")));
         values.put("author", values.get("author").replace(";", " and "));
         values.put("author", values.get("author").replace("  ", " "));
         Reference r = new Reference(values);
         rr.addArticle(r);
+        
+        return error;
     }
     
     /**
@@ -167,6 +171,23 @@ public class ReferenceService {
         } else {
             return "";
         }
+    }
+
+    private String validate(Map<String, String> values) {
+        throw new UnsupportedOperationException("Not yet implemented");
+        /**
+         * Tässä käy läpi nuo kaikki arvot siellä mapissa jotka vaatii validointia
+         * eli nuo mitkä on listattu backlogissa. 
+         * 
+         * Tekee erilliset metodit, jotka palauttaa kans stringiä, jotka katenoidaan
+         * tohon erroriin. Ne erilliset Virheet sit muotoon 
+         * "Vuosiluvun täytyy olla nelinumeroinen kokonaisluku. "
+         * eli väli perään, niin seuraava katenoiduu kivasti perään kiinni.
+         * 
+         * Controllerissa ja add.jsp:ssä toimii kaikki jo täysin.
+         */
+        
+        //String error = "";
     }
     
     

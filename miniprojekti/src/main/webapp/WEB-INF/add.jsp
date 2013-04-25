@@ -15,6 +15,10 @@
     <body>
         <h1>Viitehallintajärjestelmä</h1>
         <a href="front"><< Takaisin etusivulle <<</a>
+        <c:if test="${not empty error}">
+                <p>Virhe: ${error}</p>
+        </c:if>
+        
         <c:choose>
             <c:when test="${type == 'Article'}">
                 <h2>Lisää artikkelin viite</h2>

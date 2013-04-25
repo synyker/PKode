@@ -189,6 +189,9 @@ public class ReferenceService {
         
         //String error = "";
     }
+    public void deleteArticle(String id) {
+        rr.deleteArticle(id);
+    }
     
     
 }

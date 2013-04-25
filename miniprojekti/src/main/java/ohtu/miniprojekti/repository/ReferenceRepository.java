@@ -105,7 +105,8 @@ public class ReferenceRepository {
      * Deletes a Reference from the Database
      * @param reference 
      */
-    public void deleteArticle(Reference reference) {
+    public void deleteArticle(String id) {
+        List<Reference> reference = server.find(Reference.class).where().like("id","%"+id+"%").findList();
         server.delete(reference);
     }
     

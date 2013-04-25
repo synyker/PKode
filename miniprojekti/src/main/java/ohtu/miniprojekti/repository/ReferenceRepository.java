@@ -102,6 +102,14 @@ public class ReferenceRepository {
     }
     
     /**
+     * Deletes a Reference from the Database
+     * @param reference 
+     */
+    public void deleteArticle(Reference reference) {
+        server.delete(reference);
+    }
+    
+    /**
      * Checks that the textid set for a reference is unique.
      * 
      * If it is not unique, a letter (a, b, c..) is added into the end to make

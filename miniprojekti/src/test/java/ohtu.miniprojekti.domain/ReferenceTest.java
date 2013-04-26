@@ -83,4 +83,11 @@ public class ReferenceTest {
         reference = new Reference(map);
         assertEquals("InProceedings", reference.getType());
     }
+    
+    @Test
+    public void updateValuesUpdates() {
+        map.put("author", "Uusi, Ulla");
+        reference.updateValues(map);
+        assertEquals("Uusi, Ulla", reference.getAuthor());
+    }
 }

@@ -4,7 +4,6 @@
     Author     : krista
 --%>
 
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -22,7 +21,7 @@
         </c:if>
                 
         <c:choose>
-            <c:when test="${type == 'Article'}">
+            <c:when test="${reference.type == 'Article'}">
                 <h2>Muokkaa artikkelin viitettä</h2>
                 <form method="POST" action="edit">
                     <p>Author:<input type="text" name="author" value="${reference.author}"/> Syötä ensin sukunimi, erota se etunimestä pilkulla, erota useampi kirjailija puolipisteellä, esim "Sukunimi, Matti; Sukunimi, Teppo."</p>
@@ -40,7 +39,7 @@
 
                 </form>
             </c:when>
-            <c:when test="${type == 'InProceedings'}">
+            <c:when test="${reference.type == 'InProceedings'}">
                 <h2>Muokkaa inproceedings viitettä</h2>
                 <form method="POST" action="edit">
                     <p>Author:<input type="text" name="author"value="${reference.author}"/>Syötä ensin sukunimi, erota se etunimestä pilkulla, erota useampi kirjailija puolipisteellä, esim "Sukunimi, Matti; Sukunimi, Teppo."
@@ -59,7 +58,7 @@
 
                 </form>
             </c:when>
-            <c:when test="${type == 'Book'}">
+            <c:when test="${reference.type == 'Book'}">
                 <h2>Muokkaa kirja viitettä</h2>
                 <form method="POST" action="edit">
                     <p>Author:<input type="text" name="author" value="${reference.author}"/>Syötä ensin sukunimi, erota se etunimestä pilkulla, erota useampi kirjailija puolipisteellä, esim "Sukunimi, Matti; Sukunimi, Teppo."

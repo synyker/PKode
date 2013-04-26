@@ -51,10 +51,11 @@ public class ReferenceService {
         if (error.equals("")) {
             values.put("textid", generateTextId(values.get("author"), values.get("year")));
             values.put("author", values.get("author").replace(";", " and "));
-            values.put("author", values.get("author").replace("[ ]+", " "));
-            Reference r = rr.findUnique(values.get("id"));
-            r.updateValues(values);
-            rr.editArticle(r);
+            values.put("author", values.get("author").replace("  ", " "));
+            Reference ref = rr.findUnique(values.get("id"));
+            ref.updateValues(values);
+            rr.editReference(ref);
+            
         }
         return error;
     }

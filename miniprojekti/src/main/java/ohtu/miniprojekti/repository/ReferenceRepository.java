@@ -27,11 +27,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReferenceRepository {
     private EbeanServer server;
-
-    public Reference findUnique(String id) {
-        return server.find(Reference.class).where().like("id", id).findUnique();
-    }
-
     
     public enum Database {
         H2, SQLite
@@ -105,21 +100,22 @@ public class ReferenceRepository {
         server.save(reference);
     }
     
-    public void editArticle(Reference r) {
-        this.server.save(r);
+    public void editReference(Reference reference) {
+        reference = checkThatTextidUnique(reference);
+        server.update(reference);
     }
     
     /**
-     * Deletes a Reference from the Database
+     * Deletes a Reference from the Database.
      * @param reference 
      */
     public void deleteArticle(String id) {
-        List<Reference> reference = server.find(Reference.class).where().like("id", id).findList();
+        List<Reference> reference = server.find(Reference.class).where().eq("id", id).findList();
         server.delete(reference);
     }
     
-    public void editReference(Reference Reference) {
-        
+    public Reference findUnique(String id) {
+        return server.find(Reference.class).where().eq("id", id).findUnique();
     }
     
     /**

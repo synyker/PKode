@@ -101,8 +101,8 @@ public class ReferenceController {
         String error = rs.editArticle(map);
         if(!error.equals("")) {
             request.setAttribute("error", error);
-            request.setAttribute("reference", map);
-            request.setAttribute("type", map.get("type")[0]);
+            Reference ref = rs.findUnique(request.getParameter("id"));
+            request.setAttribute("reference", ref);
             return "edit";
         }
         List<Reference> list = rs.getList();

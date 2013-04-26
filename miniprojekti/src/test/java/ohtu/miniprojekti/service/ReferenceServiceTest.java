@@ -227,6 +227,19 @@ public class ReferenceServiceTest {
          rs.deleteArticle("1");
          assertEquals(0, rs.getList().size());
      }
+     
+     @Test
+     public void editReferenceUpdatesAuthor() {
+         rs.addArticle(map);
+         arr = new String[1];
+         arr[0] = "Uusi, Ulla";
+         map.put("author", arr);
+         arr = new String[1];
+         arr[0] = "1";
+         map.put("id", arr);
+         rs.editArticle(map);
+         assertEquals("Uusi, Ulla", rs.getList().get(0).getAuthor());
+     }
 
 
 }

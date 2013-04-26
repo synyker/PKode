@@ -123,6 +123,16 @@ public class ReferenceRepositoryTest {
           int i = reference.getId();
           String id = Integer.toString(i);
           rr.deleteArticle(id);
-          assertEquals(0, rr.findList("eilöydy").size());
+          assertEquals(0, rr.getList().size());
       }
+      
+      @Test
+      public void updateUpdatesAuthor() {
+          rr.addArticle(reference);
+          Reference ref = rr.findUnique(Integer.toString(reference.getId()));
+          ref.setAuthor("Uusi, Ulla");
+          rr.editReference(ref);
+      }
+      
+      
 }

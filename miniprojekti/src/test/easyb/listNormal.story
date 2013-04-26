@@ -9,7 +9,7 @@ description 'user can list all added articles in a readable form'
 scenario "user can list all added articles in readable format", {
     given 'command list all selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("normal"));       
         element.click(); 
     }

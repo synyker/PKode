@@ -9,7 +9,7 @@ description 'user can download a file with a selected name containing all refere
 scenario "user downloads file and gives the file a name", {
     given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -22,7 +22,7 @@ scenario "user downloads file and gives the file a name", {
         element.submit();
     }
     when 'command list all in bibtex format is selected', {
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("bib"));
         element.click();
         element = driver.findElement(By.id("filename"));

@@ -8,7 +8,7 @@ description 'Information that user gives is validated before reference is added 
 scenario "when user adds an article with no author it is not saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -37,7 +37,7 @@ scenario "when user adds an article with no author it is not saved to the databa
 scenario "when user adds an article with author in wrong format it is not saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -68,7 +68,7 @@ scenario "when user adds an article with author in wrong format it is not saved 
 scenario "when user adds an article with no title it is not saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -97,7 +97,7 @@ scenario "when user adds an article with no title it is not saved to the databas
 scenario "when user adds an article in correct format and a title it is saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -124,7 +124,7 @@ scenario "when user adds an article in correct format and a title it is saved to
 scenario "when user adds an article with year that has less than 4 digitd it is not saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -152,7 +152,7 @@ scenario "when user adds an article with year that has less than 4 digitd it is 
 scenario "when user adds an article with year that has other characters than 4 digitd it is not saved to the database", {
     given 'command add article selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));

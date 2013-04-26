@@ -12,7 +12,7 @@
     
     <properties>
         <spring.version>3.1.2.RELEASE</spring.version>
-        <jetty.port>20357</jetty.port>
+        <jetty.port>10375</jetty.port>
         <jetty.maven.plugin.version>8.1.5.v20120716</jetty.maven.plugin.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <easyb.version>1.5</easyb.version>
@@ -243,7 +243,7 @@
                     <systemProperties>                        
                         <systemProperty>
                             <name>jetty.port</name>
-                            <value>20357</value>
+                            <value>10375</value>
                         </systemProperty>                        
                     </systemProperties>
                     

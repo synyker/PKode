@@ -9,7 +9,7 @@ description 'user can also add books and inproceedings, and these are shown when
 scenario "when user adds a book it is saved to the database", {
     given 'command add book selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addB"));
@@ -39,7 +39,7 @@ scenario "when user adds a book it is saved to the database", {
 scenario "when user adds inproceedings they are saved to the database", {
     given 'command add inproceedings selected', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:20357");
+        driver.get("http://localhost:10375");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addI"));

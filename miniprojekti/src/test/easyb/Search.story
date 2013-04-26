@@ -9,7 +9,7 @@ description 'user search references with the name of the author'
 scenario "user can search for references with a certain authors name", {
     given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8736");
+        driver.get("http://localhost:10736");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -36,7 +36,7 @@ scenario "user can search for references with a certain authors name", {
 scenario "user can search for references with a certain authors name and it wont return other authors articles", {
 given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8736");
+        driver.get("http://localhost:10736");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));

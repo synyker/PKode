@@ -9,7 +9,7 @@ description 'user can list all added articles in BibTex format'
 scenario "after adding an article to database it is shown in the list in BibTex Format", {
     given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:8736");
+        driver.get("http://localhost:10736");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -22,7 +22,7 @@ scenario "after adding an article to database it is shown in the list in BibTex 
         element.submit();
     }
     when 'command list all in BibTex format is selected', {
-        driver.get("http://localhost:8736");
+        driver.get("http://localhost:10736");
         element = driver.findElement(By.id("bib"));
         element.click();
     }

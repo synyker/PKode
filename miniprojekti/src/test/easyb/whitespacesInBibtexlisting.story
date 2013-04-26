@@ -10,7 +10,7 @@ description 'user can list all added articles in BibTex format and all lines exc
 scenario "When references are listed in textarea there are 4 whitespaces in  front of each line", {
     given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:10736");
+        driver.get("http://localhost:20357");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -23,7 +23,7 @@ scenario "When references are listed in textarea there are 4 whitespaces in  fro
         element.submit();
     }
     when 'command list all in BibTex format is selected', {
-        driver.get("http://localhost:10736");
+        driver.get("http://localhost:20357");
         element = driver.findElement(By.id("bib"));
         element.click();
     }
@@ -41,7 +41,7 @@ scenario "When references are listed in textarea there are 4 whitespaces in  fro
 scenario "When references are listed in the file there are 4 whitespaces in  front of each line", {
     given 'an article has been added to database', {
         driver = new HtmlUnitDriver();
-        driver.get("http://localhost:10736");
+        driver.get("http://localhost:20357");
         element = driver.findElement(By.id("what-to-add"));
         element.click();
         element = driver.findElement(By.id("addA"));
@@ -54,7 +54,7 @@ scenario "When references are listed in the file there are 4 whitespaces in  fro
         element.submit();
     }
     when 'command list all in BibTex format is selected', {
-        driver.get("http://localhost:10736");
+        driver.get("http://localhost:20357");
         element = driver.findElement(By.id("bib"));
         element.click();
         

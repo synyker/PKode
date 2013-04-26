@@ -8,7 +8,7 @@ description 'User can edit an added reference'
 scenario "when user edits author field of added article new information is saved", {
     given 'article has been added and command edit article has been given', {
       	driver = new HtmlUnitDriver();
-        driver.get("http://localhost:10736");
+        driver.get("http://localhost:20357");
         element = driver.findElement(By.id("normal"));
         element.click();
 		element = driver.findElement(By.id("editbutton"));

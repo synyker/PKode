@@ -2,3 +2,5 @@
 .gitignore
 *DS_STORE
 /miniprojekti/target/
+/miniprojekti/target/
+/miniprojekti/*.db

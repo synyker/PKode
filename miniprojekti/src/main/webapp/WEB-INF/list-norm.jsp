@@ -86,7 +86,7 @@
             
                 <form action="delete" method="GET">
                     <input type="hidden" name="id" value="${reference.id}"/>
-                    <input name="delete" type="submit" value="Delete"/>
+                    <input name="delete" type="submit" value="Delete" id="editbutton"/>
                 </form>
                 <form action="edit" method="GET">
                     <input type="hidden" name="id" value="${reference.id}"/>
